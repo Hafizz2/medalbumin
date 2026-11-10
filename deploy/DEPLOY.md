@@ -25,33 +25,51 @@ Laravel's app code must live OUTSIDE the web root; only `public/` is served:
 
 `deploy.sh` uploads exactly that and rewrites `index.php` paths for you.
 
-## Deploying from this machine
+## Deploying with git (the normal way)
+
+The code lives at `https://github.com/Hafizz2/medalbumin.git`; Vite assets are committed, so the server never needs Node. If the repo is private, clone with a GitHub token (`https://<token>@github.com/Hafizz2/medalbumin.git`) or use cPanel → *Git Version Control*.
+
+### First deploy — on the server (cPanel Terminal or SSH)
 
 ```bash
-# 1. Fill in the connection details once:
-cp deploy/deploy.config.example.sh deploy/deploy.config.sh   # then edit it
+cd ~
+git clone https://github.com/Hafizz2/medalbumin.git app
 
-# 2. Ship it:
-bash deploy/deploy.sh
-```
+# PHP dependencies (cPanel ships composer; otherwise: curl -sS https://getcomposer.org/installer | php)
+cd ~/app/backend
+composer install --no-dev --optimize-autoloader
 
-What the script does:
-
-1. Builds the Vite assets locally (`npm run build` in `backend/`).
-2. Installs production PHP dependencies into a clean `vendor/` (`composer install --no-dev`) — done locally so the server doesn't need Composer.
-3. Uploads the app to `~/medalbumin` and the public files to `~/public_html` (rsync over SSH).
-4. On the server: links storage, runs `php artisan migrate --force`, rebuilds caches.
-
-## First deploy only — on the server
-
-```bash
-cd ~/medalbumin
-cp .env.production .env        # then fill in every <...> value
+# Environment
+cp .env.production .env
+nano .env                      # fill every <...>: DB, mail password, Chapa/Telegram keys
 php artisan key:generate
 php artisan migrate --force --seed   # --seed only if you want the demo/admin seed data
-php artisan storage:link
+
+# Wire the web root (public_html is the docroot of medalbumin.com)
+cp -a ~/app/backend/public/. ~/public_html/
+sed -i "s|__DIR__.'/../|'$HOME/app/backend/'.'|g" ~/public_html/index.php
+ln -sfn ~/app/backend/storage/app/public ~/public_html/storage
+
+# Caches
+php artisan config:cache
+php artisan route:cache
+php artisan view:cache
+```
+
+### Updating after a new push
+
+```bash
+cd ~/app && git pull
+cd backend && composer install --no-dev --optimize-autoloader
+php artisan migrate --force
+cp -a ~/app/backend/public/. ~/public_html/
+sed -i "s|__DIR__.'/../|'$HOME/app/backend/'.'|g" ~/public_html/index.php
 php artisan config:cache && php artisan route:cache && php artisan view:cache
 ```
+
+## Alternative: rsync from this machine
+
+`deploy/deploy.sh` pushes the working tree straight over SSH (no git on the server needed): copy `deploy.config.example.sh` to `deploy.config.sh`, fill in the SSH details, run `bash deploy/deploy.sh`.
 
 Add two cron jobs in cPanel → *Cron Jobs*:
 
