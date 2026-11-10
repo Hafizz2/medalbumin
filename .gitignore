@@ -2,8 +2,3 @@
 .DS_Store
 Thumbs.db
 *.log
-
-# Laravel runtime state (backend/.gitignore handles the rest)
-backend/storage/framework/cache/data/
-backend/storage/framework/sessions/
-backend/storage/framework/views/
