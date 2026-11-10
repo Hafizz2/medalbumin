@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Match predictor — chance per university</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="background: #062A5E; color: #F3F6FA; padding: 52px 20px 18px; border-radius: 0 0 28px 28px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <a href="MatchSpecialty.dc.html" aria-label="Back to specialties" style="width: 44px; height: 44px; border-radius: 14px; background: #12407F; display: flex; align-items: center; justify-content: center; color: #F3F6FA; flex-shrink: 0"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12px; font-weight: 600; color: #A9BBD8">Step 3 of 3 · Your chances</span>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px"><span style="height: 4px; border-radius: 99px; background: {{accent}}"></span><span style="height: 4px; border-radius: 99px; background: {{accent}}"></span><span style="height: 4px; border-radius: 99px; background: {{accent}}"></span></div>
+      </div>
+      <a href="MatchScore.dc.html" style="flex-shrink: 0; padding: 6px 10px; border-radius: 12px; background: #12407F; color: #F3F6FA; text-decoration: none; display: flex; flex-direction: column; align-items: flex-end"><span style="font-size: 10px; color: #A9BBD8">Score · edit</span><span style="font-family: 'Geist Mono', monospace; font-size: 15px; color: {{accent}}">{{score}}</span></a>
+    </div>
+    <div role="tablist" aria-label="Specialty" style="display: flex; gap: 6px; background: #0D3672; padding: 4px; border-radius: 14px">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+        <button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #A9BBD8"><span>{{summary}}</span><span>2023–2025 data</span></div>
+  </div>
+
+  <div style="padding: 14px 20px 0; display: flex; flex-direction: column; gap: 10px">
+    <div style="padding: 10px 14px; border-radius: 14px; background: #EDF7F9; color: #015A66; font-size: 13px; display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"></path></svg>{{whatIf}}</div>
+    <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; overflow: hidden">
+      <sc-for list="{{unis}}" as="u" hint-placeholder-count="6">
+        <div style="{{u.row}}">
+          <button aria-pressed="{{u.added}}" aria-label="{{u.addLabel}}" onClick="{{u.toggle}}" style="{{u.addStyle}}">{{u.addText}}</button>
+          <span style="flex: 1; display: flex; flex-direction: column; gap: 3px; min-width: 0">
+            <span style="font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{u.name}}</span>
+            <span style="font-size: 11px; color: #56657D; font-family: 'Geist Mono', monospace">{{u.trend}} <span style="color: {{u.trendInk}}">{{u.arrow}}</span> · {{u.seats}} seats</span>
+          </span>
+          <span style="display: flex; flex-direction: column; align-items: flex-end; gap: 3px; width: 70px; flex-shrink: 0">
+            <span style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; line-height: 1; color: {{u.ink}}">{{u.p}}%</span>
+            <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: {{u.ink}}">{{u.label}}</span>
+          </span>
+        </div>
+      </sc-for>
+    </div>
+    <p style="margin: 0; font-size: 11px; line-height: 1.4; color: #56657D">Cut-offs shown for 2023 → 2024 → 2025. An estimate only — the Ministry of Health makes the final match.</p>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 20px 28px; background: #F3F6FA; border-top: 1px solid #E0E6EE">
+    <a href="MatchChoices.dc.html" style="height: 56px; border-radius: 16px; background: #062A5E; color: #F3F6FA; text-decoration: none; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; font-weight: 600; font-size: 15px"><span>Review my choice list</span><span style="font-family: 'Geist Mono', monospace; font-size: 13px; color: {{accent}}">{{chosen}} / 3 picked</span></a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { spec: 'im', picks: { im: ['jimma', 'gondar'], ped: [] } }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const score = 77.7;
+    const SP = [['im', 'Internal Medicine', 0], ['ped', 'Pediatrics', -3]];
+    const tabs = SP.map(([id, label]) => {
+      const on = id === this.state.spec;
+      return { label, on: on ? 'true' : 'false', pick: () => this.setState({ spec: id }),
+        style: 'flex: 1; height: 40px; border: 0; border-radius: 11px; cursor: pointer; font-size: 14px; font-weight: 600; ' + (on ? 'background: #F3F6FA; color: #062A5E' : 'background: transparent; color: #A9BBD8') };
+    });
+    const off = SP.find((x) => x[0] === this.state.spec)[2];
+    const U = [
+      ['aau', 'Addis Ababa University', [77, 79, 80], 24], ['sph', 'St. Paul’s Millennium MC', [76, 77, 78], 20],
+      ['jimma', 'Jimma University', [72, 73, 74], 18], ['gondar', 'University of Gondar', [72, 72, 73], 16],
+      ['bdu', 'Bahir Dar University', [70, 71, 71], 12], ['hu', 'Hawassa University', [71, 70, 70], 14]
+    ];
+    const picks = this.state.picks[this.state.spec];
+    const chance = (s, cut) => Math.max(3, Math.min(97, Math.round(100 / (1 + Math.exp(-(s - cut) / 2.5)))));
+    let likely = 0, likelyPlus = 0;
+    const unis = U.map(([id, name, cuts, seats]) => {
+      const c = cuts.map((x) => x + off);
+      const p = chance(score, c[2]);
+      if (p >= 70) likely++;
+      if (chance(score + 3, c[2]) >= 70) likelyPlus++;
+      const tier = p >= 70 ? 'Likely' : p >= 35 ? 'Possible' : 'Reach';
+      const ink = tier === 'Likely' ? '#017F8E' : tier === 'Possible' ? '#7A5A12' : '#B4441A';
+      const rank = picks.indexOf(id);
+      const added = rank > -1;
+      const up = c[2] > c[0];
+      return { id, name, seats, p, label: tier, ink,
+        trend: c.join(' → '), arrow: up ? '▲' : c[2] < c[0] ? '▼' : '■', trendInk: up ? '#B4441A' : '#017F8E',
+        added: added ? 'true' : 'false', addText: added ? String(rank + 1) : '+', addLabel: added ? 'Remove from choices' : 'Add to choices',
+        toggle: () => {
+          const cur = this.state.picks[this.state.spec];
+          const next = added ? cur.filter((x) => x !== id) : (cur.length < 3 ? [...cur, id] : cur);
+          this.setState({ picks: { ...this.state.picks, [this.state.spec]: next } });
+        },
+        addStyle: 'width: 36px; height: 36px; border-radius: 11px; flex-shrink: 0; cursor: pointer; font-family: Geist Mono, monospace; font-size: 15px; ' + (added ? 'background: #062A5E; color: ' + accent + '; border: 0' : 'background: #FFFFFF; color: #062A5E; border: 1.5px dashed #C3CCDA') };
+    }).sort((a, b) => b.p - a.p).map((u, i) => ({ ...u, row: 'display: flex; align-items: center; gap: 12px; padding: 10px 14px; min-height: 62px; box-sizing: border-box; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : '') }));
+    const more = likelyPlus - likely;
+    return { accent, tabs, unis, score: score.toFixed(1), chosen: picks.length,
+      summary: likely + ' likely · ' + (U.length - likely) + ' possible or reach',
+      whatIf: more > 0 ? '+3 points would make ' + more + ' more universit' + (more > 1 ? 'ies' : 'y') + ' “Likely”.' : 'You are already above most cut-offs here.' };
+  }
+}
+</script>
+</body>
+</html>

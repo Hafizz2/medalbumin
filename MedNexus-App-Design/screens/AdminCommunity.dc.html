@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Community and doubts</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,textarea{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="12">
+        <a href="{{n.href}}" style="{{n.style}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{n.d}}"></path></svg>{{n.label}}</a>
+      </sc-for>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">SG</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Selam G.</span><span style="font-size: 11px; color: #94A6C4">Faculty · Content editor</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">Student doubts under questions · 1,820 posts this week</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Community</h1>
+      </div>
+      <div role="tablist" aria-label="Queue" style="display: flex; gap: 6px; background: #E6EBF2; padding: 4px; border-radius: 14px">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="2">
+          <button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}} <span style="font-family: 'Geist Mono', monospace; font-size: 12px; opacity: 0.7">{{t.n}}</span></button>
+        </sc-for>
+      </div>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <sc-for list="{{items}}" as="i" hint-placeholder-count="5">
+          <button onClick="{{i.pick}}" style="{{i.row}}">
+            <span style="display: flex; justify-content: space-between; width: 100%; gap: 8px"><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #56657D">{{i.q}}</span><span style="{{i.badge}}">{{i.tag}}</span></span>
+            <span style="font-size: 14px; font-weight: 500; line-height: 1.4; text-align: left">{{i.text}}</span>
+            <span style="font-size: 12px; color: #56657D">{{i.who}}</span>
+          </button>
+        </sc-for>
+      </section>
+
+      <section style="flex: 2 1 480px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px">
+        <div style="padding: 12px 14px; border-radius: 14px; background: #F3F6FA; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 12px; color: #56657D">On question {{cur.q}} · <a href="AdminQuestions.dc.html">open in editor</a></span>
+          <span style="font-size: 14px; font-weight: 500">{{cur.stem}}</span>
+        </div>
+        <div style="display: flex; gap: 12px">
+          <span style="width: 36px; height: 36px; border-radius: 50%; background: #D7E4F2; color: #017F8E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0">{{cur.ini}}</span>
+          <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; font-weight: 600">{{cur.who}}</span><span style="font-size: 15px; line-height: 1.5">{{cur.text}}</span></span>
+        </div>
+
+        <sc-if value="{{isDoubt}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">Faculty answer</span>
+              <textarea rows="4" style="border-radius: 14px; border: 1px solid #D8DFEA; padding: 12px 14px; font-size: 14px; line-height: 1.5; resize: vertical; background: #F9FBFD">Yes — ST elevation in V4R suggests right ventricular involvement. Give fluids and avoid nitrates.</textarea>
+            </label>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px">
+              <span style="font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 99px; background: #DDF3F5; color: #017F8E">✓ Pin as verified answer</span>
+              <span style="font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 99px; background: #E6EBF2; color: #475569">Also add to the explanation</span>
+              <span style="font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 99px; background: #E6EBF2; color: #475569">Notify the student</span>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px">
+              <button onClick="{{resolve}}" style="height: 46px; padding: 0 18px; border-radius: 14px; background: #017F8E; color: #FFFFFF; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Post verified answer</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{isFlag}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <span style="padding: 10px 14px; border-radius: 12px; background: #FFE8D6; color: #6A2C0E; font-size: 13px">Flagged by {{cur.flags}} students · reason: {{cur.reason}}</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end">
+              <button onClick="{{resolve}}" style="height: 46px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer">Keep post</button>
+              <button onClick="{{resolve}}" style="height: 46px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; color: #8A3412; font-size: 14px; font-weight: 600; cursor: pointer">Warn user</button>
+              <button onClick="{{resolve}}" style="height: 46px; padding: 0 16px; border-radius: 14px; background: #8A2A1A; color: #FFFFFF; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Hide post</button>
+            </div>
+          </div>
+        </sc-if>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 'doubt', sel: 0, done: {} }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const NAV = [
+      ['AdminDashboard.dc.html', 'Dashboard', 'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z'],
+      ['AdminQuestions.dc.html', 'Question bank', 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01'],
+      ['AdminExams.dc.html', 'Exam builder', 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM12 9v4l2.5 2M10 2h4'],
+      ['AdminVideos.dc.html', 'Video library', 'M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3'],
+      ['AdminNotes.dc.html', 'Departments & notes', 'M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5'],
+      ['AdminMatch.dc.html', 'Match data', 'M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z'],
+      ['AdminUsers.dc.html', 'Users', 'M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3'],
+      ['AdminPayments.dc.html', 'Payments', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20M6 15h4'],
+      ['AdminCommunity.dc.html', 'Community', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],
+      ['AdminAnalytics.dc.html', 'Analytics', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
+      ['AdminUsers.dc.html', 'Push notifications', 'M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0'],
+      ['AdminSettings.dc.html', 'Settings', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1']
+    ];
+    const active = 'Community';
+    const nav = NAV.map(([href, label, d]) => ({ href, label, d, style: 'min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; ' + (label === active ? 'font-weight: 600; background: #12407F; color: #F3F6FA' : 'font-weight: 500; color: #A9BBD8') }));
+    const DATA = {
+      doubt: [
+        ['Q-02418', 'Would right-sided leads (V4R) help here?', 'Abdi M. · Jigjiga University · 1 d', 'AM', 'A 58-year-old man with chest pain and pulse 48/min — which artery is occluded?'],
+        ['Q-01902', 'Is the Zuspan regimen also accepted in our exam?', 'Ruth B. · University of Gondar · 6 h', 'RB', 'MgSO₄ loading dose in eclampsia'],
+        ['Q-00977', 'The Amharic option C means “first” not “best” — which is right?', 'Hawi T. · Haramaya University · 3 h', 'HT', 'Amharic version of the pre-eclampsia question'],
+        ['Q-01377', 'Why is it metabolic alkalosis and not acidosis?', 'Samuel D. · Hawassa University · 40 min', 'SD', 'Acid–base disorder in a vomiting child']
+      ],
+      flag: [
+        ['Q-02101', 'Join my Telegram, I sell all grand mock answers before the exam', 'Unknown user · 2 h', 'UU', 'Grand Mock #11 discussion', 9, 'Spam / cheating'],
+        ['Q-01455', 'This question is stupid and so is whoever wrote it', 'Kebede A. · 5 h', 'KA', 'Surgery: appendicitis scoring', 4, 'Abusive language']
+      ]
+    };
+    const tab = this.state.tab;
+    const list = DATA[tab];
+    const done = this.state.done;
+    const items = list.map((d, i) => {
+      const key = tab + i; const on = i === this.state.sel; const isDone = !!done[key];
+      return { q: d[0], text: d[1], who: d[2], tag: isDone ? 'Done' : tab === 'doubt' ? 'Needs answer' : 'Flagged',
+        badge: 'font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; background: ' + (isDone ? '#DDF3F5' : tab === 'doubt' ? '#FFF3E8' : '#FFE8D6') + '; color: ' + (isDone ? '#017F8E' : '#8A3412'),
+        pick: () => this.setState({ sel: i }),
+        row: 'width: 100%; border: 0; cursor: pointer; padding: 14px 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; color: #062A5E; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5; ' : '') + (on ? 'background: #EDF7F9; box-shadow: inset 3px 0 0 #017F8E' : 'background: #FFFFFF') + (isDone ? '; opacity: 0.55' : '') };
+    });
+    const c = list[Math.min(this.state.sel, list.length - 1)];
+    const cur = { q: c[0], text: c[1], who: c[2], ini: c[3], stem: c[4], flags: c[5], reason: c[6] };
+    const tabs = [['doubt', 'Unanswered doubts', DATA.doubt.length], ['flag', 'Flagged posts', DATA.flag.length]].map(([id, label, n]) => { const on = id === tab; return { label, n, on: on ? 'true' : 'false', pick: () => this.setState({ tab: id, sel: 0 }),
+      style: 'height: 40px; padding: 0 14px; border: 0; border-radius: 11px; cursor: pointer; font-size: 14px; font-weight: ' + (on ? '600; background: #FFFFFF; color: #062A5E' : '500; background: transparent; color: #475569') }; });
+    return { accent, nav, tabs, items, cur, isDoubt: tab === 'doubt', isFlag: tab === 'flag',
+      resolve: () => { const k = tab + this.state.sel; const nd = { ...done, [k]: true }; const next = list.findIndex((_, i) => !nd[tab + i]); this.setState({ done: nd, sel: next === -1 ? this.state.sel : next }); } };
+  }
+}
+</script>
+</body>
+</html>

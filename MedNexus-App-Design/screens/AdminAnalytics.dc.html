@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Analytics and question quality</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="12">
+        <a href="{{n.href}}" style="{{n.style}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{n.d}}"></path></svg>{{n.label}}</a>
+      </sc-for>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">DA</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Dawit A.</span><span style="font-size: 11px; color: #94A6C4">Super admin</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">How students use the app, and which questions need fixing</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Analytics</h1>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <button style="height: 44px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer">Export users (CSV)</button>
+        <button style="height: 44px; padding: 0 14px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer">Export payments</button>
+        <button style="height: 44px; padding: 0 14px; border-radius: 14px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Monthly report (PDF)</button>
+      </div>
+    </header>
+
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+        <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #56657D">{{k.l}}</span><span style="font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 700">{{k.v}}</span><span style="font-size: 12px; font-weight: 600; color: #017F8E">{{k.s}}</span></div>
+      </sc-for>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 14px">
+      <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Daily active students</h2><span style="font-size: 12px; color: #56657D">Last 30 days · weekends darker</span></div>
+        <div style="height: 170px; display: flex; align-items: flex-end; gap: 4px; border-bottom: 1px solid #EBEFF5">
+          <sc-for list="{{dau}}" as="d" hint-placeholder-count="30"><span style="flex: 1; border-radius: 4px 4px 1px 1px; height: {{d.h}}; background: {{d.c}}"></span></sc-for>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-family: 'Geist Mono', monospace; font-size: 11px; color: #56657D"><span>Sep 14</span><span>Peak 7,980 · Grand Mock #11</span><span>Oct 13</span></div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+        <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">From install to paying</h2>
+        <sc-for list="{{funnel}}" as="f" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span style="display: flex; justify-content: space-between; font-size: 13px"><span style="font-weight: 500">{{f.l}}</span><span style="font-family: 'Geist Mono', monospace">{{f.v}} <span style="color: #56657D">· {{f.p}}</span></span></span>
+            <span style="height: 22px; border-radius: 8px; background: #EBEFF5; overflow: hidden"><span style="display: block; height: 100%; width: {{f.p}}; background: #017F8E; border-radius: 8px"></span></span>
+          </div>
+        </sc-for>
+        <span style="font-size: 12px; color: #56657D">Biggest drop: sign-up → first 10 questions. Try a guided first quiz.</span>
+      </div>
+    </section>
+
+    <section style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+      <div style="padding: 16px 18px; border-bottom: 1px solid #EBEFF5; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+        <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Question quality</h2>
+        <div style="display: flex; gap: 6px">
+          <sc-for list="{{qtabs}}" as="t" hint-placeholder-count="3">
+            <button aria-pressed="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="overflow-x: auto">
+        <div style="min-width: 780px; display: grid; grid-template-columns: 0.8fr 3fr 0.9fr 0.9fr 1fr 0.8fr 1.3fr; align-items: center; font-size: 14px">
+          <span style="padding: 12px 18px; font-size: 12px; font-weight: 600; color: #56657D">ID</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Question</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Attempts</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Correct</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Top-students correct</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Avg time</span><span style="padding: 12px 18px 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Flag</span>
+          <sc-for list="{{qs}}" as="q" hint-placeholder-count="5">
+            <span style="padding: 0 18px; min-height: 52px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 12px"><a href="AdminQuestions.dc.html">{{q.id}}</a></span>
+            <span style="min-height: 52px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; padding-right: 12px">{{q.t}}</span>
+            <span style="min-height: 52px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 13px">{{q.n}}</span>
+            <span style="min-height: 52px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 13px">{{q.c}}</span>
+            <span style="min-height: 52px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 13px">{{q.top}}</span>
+            <span style="min-height: 52px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 13px">{{q.time}}</span>
+            <span style="padding-right: 18px; min-height: 52px; display: flex; align-items: center; border-top: 1px solid #EBEFF5"><span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; background: {{q.bg}}; color: {{q.ink}}">{{q.flag}}</span></span>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { q: 'all' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const NAV = [
+      ['AdminDashboard.dc.html', 'Dashboard', 'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z'],
+      ['AdminQuestions.dc.html', 'Question bank', 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01'],
+      ['AdminExams.dc.html', 'Exam builder', 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM12 9v4l2.5 2M10 2h4'],
+      ['AdminVideos.dc.html', 'Video library', 'M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3'],
+      ['AdminNotes.dc.html', 'Departments & notes', 'M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5'],
+      ['AdminMatch.dc.html', 'Match data', 'M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z'],
+      ['AdminUsers.dc.html', 'Users', 'M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3'],
+      ['AdminPayments.dc.html', 'Payments', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20M6 15h4'],
+      ['AdminCommunity.dc.html', 'Community', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],
+      ['AdminAnalytics.dc.html', 'Analytics', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
+      ['AdminUsers.dc.html', 'Push notifications', 'M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0'],
+      ['AdminSettings.dc.html', 'Settings', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1']
+    ];
+    const active = 'Analytics';
+    const nav = NAV.map(([href, label, d]) => ({ href, label, d, style: 'min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; ' + (label === active ? 'font-weight: 600; background: #12407F; color: #F3F6FA' : 'font-weight: 500; color: #A9BBD8') }));
+    const kpis = [{ l: 'Daily active students', v: '6,240', s: '+12% vs last month' }, { l: 'Still active after 7 days', v: '48%', s: '+5 points' }, { l: 'Study time per day', v: '52 min', s: 'Median, active students' }, { l: 'Free → paid', v: '9.4%', s: '+1.2 points' }];
+    const V = [42, 45, 44, 47, 52, 61, 58, 46, 48, 50, 49, 53, 63, 60, 51, 52, 55, 54, 57, 66, 80, 59, 58, 60, 61, 63, 70, 68, 62, 64];
+    const dau = V.map((v, i) => ({ h: Math.round((v / 80) * 150) + 'px', c: i === 20 ? '#D4A72C' : (i % 7 === 5 || i % 7 === 6) ? '#017F8E' : '#9ADDE2' }));
+    const funnel = [['Installed the app', '24,800', '100%'], ['Created an account', '18,420', '74%'], ['Answered first 10 questions', '9,950', '40%'], ['Subscribed', '2,330', '9.4%']].map(([l, v, p]) => ({ l, v, p }));
+    const F = { 'Too hard': ['#FFE8D6', '#8A3412'], 'Ambiguous': ['#F0E9FB', '#5A3399'], 'Too easy': ['#E4ECFB', '#24418A'], 'Good': ['#DDF3F5', '#017F8E'] };
+    const Q = [['Q-02415', 'Bloody diarrhoea + low platelets in a 4-year-old', '3,120', '29%', '31%', '1:48', 'Ambiguous'], ['Q-01377', 'Acid–base disorder in a vomiting child', '2,840', '31%', '72%', '2:05', 'Too hard'], ['Q-00412', 'Normal adult respiratory rate', '5,410', '97%', '99%', '0:14', 'Too easy'], ['Q-02418', 'Artery occluded in inferior STEMI with bradycardia', '4,960', '54%', '88%', '1:12', 'Good'], ['Q-01902', 'MgSO₄ loading dose in eclampsia', '3,300', '38%', '45%', '1:31', 'Ambiguous']];
+    const qf = this.state.q;
+    const qs = Q.filter((q) => qf === 'all' || (qf === 'flag' ? q[6] !== 'Good' : q[6] === 'Ambiguous')).map(([id, t, n, c, top, time, flag]) => ({ id, t, n, c, top, time, flag, bg: F[flag][0], ink: F[flag][1] }));
+    const qtabs = [['all', 'All'], ['flag', 'Needs review'], ['amb', 'Ambiguous only']].map(([id, label]) => { const on = id === qf; return { label, on: on ? 'true' : 'false', pick: () => this.setState({ q: id }),
+      style: 'height: 34px; padding: 0 12px; border-radius: 99px; cursor: pointer; font-size: 13px; font-weight: 500; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') }; });
+    return { accent, nav, kpis, dau, funnel, qs, qtabs };
+  }
+}
+</script>
+</body>
+</html>

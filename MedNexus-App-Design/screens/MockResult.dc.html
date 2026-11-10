@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mock exam result</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden; display: flex; flex-direction: column">
+  <div style="background: #062A5E; color: #F3F6FA; padding: 54px 20px 26px; border-radius: 0 0 32px 32px; display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Home.dc.html" aria-label="Close" style="width: 44px; height: 44px; border-radius: 14px; background: #12407F; display: flex; align-items: center; justify-content: center; color: #F3F6FA"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></a>
+      <span style="font-size: 13px; color: #A9BBD8">Exit Exam 2024 · Full mock</span>
+      <button aria-label="Share result" style="width: 44px; height: 44px; border-radius: 14px; background: #12407F; border: 0; display: flex; align-items: center; justify-content: center; color: #F3F6FA; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v13M7 8l5-5 5 5M5 14v6h14v-6"></path></svg></button>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: {{accent}}">Passed</span>
+      <div style="display: flex; align-items: baseline; gap: 10px">
+        <span style="font-family: 'Outfit', sans-serif; font-size: 76px; font-weight: 700; letter-spacing: -0.05em; line-height: 1">71<span style="font-size: 40px">%</span></span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 15px; color: #A9BBD8">142 / 200</span>
+      </div>
+    </div>
+    <div style="position: relative; height: 10px; border-radius: 99px; background: #1B4A8A">
+      <div style="width: 71%; height: 100%; border-radius: 99px; background: {{accent}}"></div>
+      <div style="position: absolute; left: 50%; top: -5px; width: 2px; height: 20px; background: #F3F6FA"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 12px; color: #A9BBD8"><span>Pass mark 50%</span><span>+7 since last mock</span></div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+      <div style="background: #0D3672; border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Geist Mono', monospace; font-size: 16px">Top 18%</span><span style="font-size: 11px; color: #94A6C4">of all takers</span></div>
+      <div style="background: #0D3672; border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Geist Mono', monospace; font-size: 16px">3h 12m</span><span style="font-size: 11px; color: #94A6C4">of 4h</span></div>
+      <div style="background: #0D3672; border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Geist Mono', monospace; font-size: 16px">58s</span><span style="font-size: 11px; color: #94A6C4">per question</span></div>
+    </div>
+  </div>
+
+  <div style="padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1">
+    <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">By system</h2><span style="font-size: 12px; color: #56657D">Weakest first</span></div>
+    <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; padding: 6px 16px; display: flex; flex-direction: column">
+      <sc-for list="{{systems}}" as="s" hint-placeholder-count="6">
+        <div style="display: grid; grid-template-columns: 104px 1fr 40px; align-items: center; gap: 12px; min-height: 40px">
+          <span style="font-size: 14px; font-weight: 500">{{s.name}}</span>
+          <span style="height: 8px; border-radius: 99px; background: #EBEFF5; overflow: hidden"><span style="display: block; height: 100%; border-radius: 99px; width: {{s.w}}; background: {{s.c}}"></span></span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 13px; text-align: right; color: {{s.ink}}">{{s.v}}</span>
+        </div>
+      </sc-for>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; gap: 10px">
+      <a href="Question.dc.html" style="flex: 1; height: 54px; border-radius: 16px; background: #FFFFFF; border: 1px solid #D8DFEA; color: #062A5E; text-decoration: none; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 15px">Review answers</a>
+      <a href="QuizBuilder.dc.html" style="flex: 1; height: 54px; border-radius: 16px; background: #062A5E; color: #F3F6FA; text-decoration: none; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 15px">Retry 58 wrong</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const S = [['Renal', 52], ['Gastro', 61], ['Neurology', 68], ['Respiratory', 74], ['OB/GYN', 77], ['Cardiology', 82]];
+    const systems = S.map(([name, v]) => ({ name, v: v + '%', w: v + '%', c: v < 60 ? '#D9692F' : '#017F8E', ink: v < 60 ? '#B4441A' : '#062A5E' }));
+    return { accent, systems };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/livewire/src/**/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../../app/**/*.php';
+
+/* MedAlbumin design tokens (from the design files) */
+@theme {
+    --font-sans: 'Geist', 'Noto Sans Ethiopic', 'Noto Sans Arabic', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Outfit', 'Noto Sans Ethiopic', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+    --color-navy: #062A5E;
+    --color-navy-2: #12407F;
+    --color-navy-3: #0D3672;
+    --color-navy-4: #1B4A8A;
+    --color-navy-5: #24508F;
+    --color-teal: #017F8E;
+    --color-teal-dark: #01606B;
+    --color-teal-ink: #015A66;
+    --color-accent: #14BCC4;
+    --color-teal-soft: #DDF3F5;
+    --color-teal-wash: #EDF7F9;
+    --color-page: #F3F6FA;
+    --color-line: #E0E6EE;
+    --color-divider: #EBEFF5;
+    --color-field: #D8DFEA;
+    --color-field-2: #C3CCDA;
+    --color-chip: #E6EBF2;
+    --color-chip-2: #EEF2F7;
+    --color-muted: #56657D;
+    --color-slate: #475569;
+    --color-haze: #A9BBD8;
+    --color-haze-2: #94A6C4;
+    --color-haze-3: #C5D3EA;
+    --color-warn-bg: #FFF3E8;
+    --color-warn: #8A3412;
+    --color-danger-bg: #FFE8D6;
+    --color-danger: #B4441A;
+    --color-danger-2: #D9692F;
+    --color-stop-bg: #F3E3E0;
+    --color-stop: #8A2A1A;
+    --color-plum-bg: #F0E9FB;
+    --color-plum: #6B3FB8;
+    --color-plum-ink: #5A3399;
+    --color-sky-bg: #E4ECFB;
+    --color-sky: #2550A8;
+    --color-sky-ink: #24418A;
+    --color-sand-bg: #FFF3D6;
+    --color-sand: #7A5A12;
+    --color-gold: #D4A72C;
+    --color-amber: #FBBF77;
+
+    --radius-card: 22px;
+    --radius-btn: 14px;
+}
+
+@layer base {
+    html { -webkit-font-smoothing: antialiased; }
+    body { @apply bg-page text-navy font-sans; }
+    h1, h2, h3 { @apply font-display; letter-spacing: -0.02em; }
+    a { @apply text-teal; }
+    a:hover { @apply text-teal-dark; }
+    [x-cloak] { display: none !important; }
+    :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+}
+
+@layer components {
+    .card { @apply bg-white border border-line rounded-[22px]; }
+    .card-pad { @apply p-5; }
+    .h-title { @apply font-display text-[32px] font-semibold tracking-[-0.03em] leading-tight; }
+    .h-section { @apply font-display text-xl font-semibold tracking-[-0.02em]; }
+    .eyebrow { @apply text-[13px] text-muted; }
+
+    .btn { @apply inline-flex items-center justify-center gap-2 h-11 px-4 rounded-[14px] text-sm font-semibold cursor-pointer transition-colors no-underline disabled:opacity-50 disabled:cursor-not-allowed; }
+    .btn-primary { @apply bg-navy text-page hover:bg-navy-2 hover:text-page; }
+    .btn-teal { @apply bg-teal text-white hover:bg-teal-dark hover:text-white; }
+    .btn-light { @apply bg-white text-navy border border-line hover:bg-page hover:text-navy; }
+    .btn-danger { @apply bg-white text-stop border border-stop-bg hover:bg-stop-bg hover:text-stop; }
+    .btn-sm { @apply h-9 px-3 rounded-[11px] text-[13px]; }
+
+    .field { @apply w-full h-11 rounded-[12px] border border-field bg-white px-3 text-sm text-navy outline-none focus:border-teal focus:ring-2 focus:ring-teal/15; }
+    textarea.field { @apply h-auto py-2.5 leading-relaxed; }
+    select.field { @apply pr-8; }
+    .label { @apply flex flex-col gap-1.5 text-[13px] font-semibold text-slate; }
+    .error { @apply text-xs font-medium text-danger; }
+
+    .badge { @apply inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-[3px] rounded-full whitespace-nowrap; }
+    .badge-ok { @apply bg-teal-soft text-teal; }
+    .badge-muted { @apply bg-chip text-slate; }
+    .badge-warn { @apply bg-warn-bg text-warn; }
+    .badge-danger { @apply bg-danger-bg text-warn; }
+    .badge-stop { @apply bg-stop-bg text-stop; }
+    .badge-sky { @apply bg-sky-bg text-sky-ink; }
+    .badge-plum { @apply bg-plum-bg text-plum-ink; }
+    .badge-navy { @apply bg-navy text-page; }
+
+    .seg { @apply flex bg-chip p-[3px] rounded-[12px]; }
+    .seg-btn { @apply h-9 px-3 rounded-[9px] text-[13px] font-semibold text-slate cursor-pointer; }
+    .seg-btn[aria-pressed='true'], .seg-btn[aria-selected='true'] { @apply bg-white text-navy shadow-[0_1px_2px_rgba(6,42,94,0.08)]; }
+
+    .chip { @apply inline-flex items-center gap-1.5 h-9 px-3.5 rounded-full border border-field bg-white text-sm font-medium text-navy cursor-pointer; }
+    .chip[aria-pressed='true'] { @apply bg-navy text-page border-navy; }
+
+    .row-sel { @apply bg-teal-wash shadow-[inset_3px_0_0_#017F8E]; }
+    .mono { @apply font-mono; }
+    .bar { @apply h-2 rounded-full bg-divider overflow-hidden; }
+    .bar > span { @apply block h-full rounded-full bg-teal; }
+
+    .table { @apply w-full text-sm; }
+    .table th { @apply text-left text-xs font-semibold text-muted px-4 py-3 border-b border-divider whitespace-nowrap; }
+    .table td { @apply px-4 py-3 border-b border-divider align-middle; }
+    .table tr:last-child td { @apply border-b-0; }
+
+    .switch { @apply relative inline-flex w-10 h-6 rounded-full p-[3px] bg-[#CFD7E3] transition-colors cursor-pointer shrink-0; }
+    .switch[aria-checked='true'] { @apply bg-teal; }
+    .switch > span { @apply block w-[18px] h-[18px] rounded-full bg-white shadow transition-transform; }
+    .switch[aria-checked='true'] > span { @apply translate-x-4; }
+
+    .prose-note h2 { @apply font-display text-lg font-semibold mt-4 mb-2; }
+    .prose-note h3 { @apply font-display text-base font-semibold mt-3 mb-1.5; }
+    .prose-note p { @apply my-2 leading-relaxed; }
+    .prose-note ul { @apply list-disc pl-5 my-2; }
+    .prose-note ol { @apply list-decimal pl-5 my-2; }
+    .prose-note mark { @apply bg-[#FFF1B8] text-navy rounded px-0.5; }
+    .prose-note table { @apply w-full border-collapse my-3 text-sm; }
+    .prose-note td, .prose-note th { @apply border border-line px-2.5 py-2 align-top; }
+    .prose-note th { @apply bg-page font-semibold text-left; }
+    .prose-note img { @apply max-w-full rounded-xl my-2; }
+    .ProseMirror { @apply outline-none min-h-[220px]; }
+}

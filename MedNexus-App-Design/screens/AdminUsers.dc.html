@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Users and reported questions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,input,textarea,select{font:inherit}
+input::placeholder,textarea::placeholder{color:#677489}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="AdminDashboard.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>Dashboard</a>
+      <a href="AdminQuestions.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"></path></svg>Question bank</a>
+      <a href="AdminExams.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2M10 2h4"></path></svg>Exam builder</a>
+      <a href="AdminVideos.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3"></path></svg>Video library</a>
+      <a href="AdminNotes.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg>Departments &amp; notes</a>
+      <a href="AdminMatch.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Match data</a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 600; background: #12407F; color: #F3F6FA"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"></path></svg>Users</a>
+      <a href="AdminPayments.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><span style="display: flex; align-items: center; gap: 12px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20M6 15h4"></path></svg>Payments</span><span style="font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: #FBBF77; color: #062A5E">12</span></a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><span style="display: flex; align-items: center; gap: 12px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 21v-7M4 14l3-11h13l-3 11z"></path></svg>Reported</span><span style="font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: #12407F; color: #F3F6FA">{{openReports}}</span></a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>Push notifications</a>
+      <a href="AdminCommunity.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Community</a>
+      <a href="AdminAnalytics.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Analytics</a>
+      <a href="AdminSettings.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>Settings</a>
+      <a href="AdminQuestions.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 5h8M8 3v2M5 9c1.5 3 4 5 7 6M11 5c-1 4-3.5 7-7 9M13 21l4-10 4 10M14.5 17h5"></path></svg>Languages</a>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">DA</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Dawit A.</span><span style="font-size: 11px; color: #94A6C4">Super admin</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">18,420 students · 3,912 subscribed</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Users &amp; reports</h1>
+      </div>
+      <label style="height: 44px; min-width: 260px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; gap: 10px; padding: 0 14px; box-sizing: border-box">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#56657D" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search users</span>
+        <input type="search" placeholder="Name, phone or student ID" style="flex: 1; border: 0; outline: 0; background: transparent; font-size: 14px">
+      </label>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section style="flex: 3 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <div role="tablist" aria-label="User filter" style="display: flex; flex-wrap: wrap; gap: 6px; padding: 14px 16px; border-bottom: 1px solid #EBEFF5">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+            <button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}} <span style="font-family: 'Geist Mono', monospace; font-size: 11px; opacity: 0.7">{{t.n}}</span></button>
+          </sc-for>
+        </div>
+        <div style="overflow-x: auto">
+          <div style="min-width: 720px; display: grid; grid-template-columns: 2.2fr 1.6fr 1fr 0.8fr 1fr 1fr; align-items: center; font-size: 14px">
+            <span style="padding: 12px 16px; font-size: 12px; font-weight: 600; color: #56657D">Student</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">University</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Plan</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Devices</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Last active</span><span style="padding: 12px 16px 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Status</span>
+            <sc-for list="{{users}}" as="u" hint-placeholder-count="7">
+              <span style="padding: 10px 16px; border-top: 1px solid #EBEFF5; display: flex; align-items: center; gap: 10px; min-height: 40px"><span style="width: 32px; height: 32px; border-radius: 50%; background: #D7E4F2; color: #017F8E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0">{{u.ini}}</span><span style="display: flex; flex-direction: column"><span style="font-weight: 600">{{u.name}}</span><span style="font-size: 12px; color: #56657D">{{u.year}}</span></span></span>
+              <span style="padding: 10px 0; border-top: 1px solid #EBEFF5; min-height: 40px; display: flex; align-items: center">{{u.uni}}</span>
+              <span style="padding: 10px 0; border-top: 1px solid #EBEFF5; min-height: 40px; display: flex; align-items: center">{{u.plan}}</span>
+              <span style="padding: 10px 0; border-top: 1px solid #EBEFF5; min-height: 40px; display: flex; align-items: center; font-family: 'Geist Mono', monospace; color: {{u.devInk}}">{{u.dev}}</span>
+              <span style="padding: 10px 0; border-top: 1px solid #EBEFF5; min-height: 40px; display: flex; align-items: center; color: #475569">{{u.last}}</span>
+              <span style="padding: 10px 16px 10px 0; border-top: 1px solid #EBEFF5; min-height: 40px; display: flex; align-items: center"><span style="{{u.badge}}">{{u.st}}</span></span>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <div style="flex: 2 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Reported questions</h2><span style="font-size: 12px; color: #56657D">{{openReports}} open</span></div>
+          <sc-for list="{{reports}}" as="r" hint-placeholder-count="3">
+            <div style="border-radius: 16px; background: #F3F6FA; padding: 14px; display: flex; flex-direction: column; gap: 8px; opacity: {{r.op}}">
+              <div style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; background: {{r.tagBg}}; color: {{r.tagInk}}">{{r.kind}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #56657D">{{r.id}} · {{r.count}}</span></div>
+              <span style="font-size: 14px; font-weight: 500; line-height: 1.4">{{r.q}}</span>
+              <span style="font-size: 13px; color: #475569; line-height: 1.4">“{{r.note}}”</span>
+              <div style="display: flex; gap: 8px">
+                <a href="AdminQuestions.dc.html" style="height: 38px; padding: 0 14px; border-radius: 11px; background: #062A5E; color: #F3F6FA; text-decoration: none; display: flex; align-items: center; font-size: 13px; font-weight: 600">Open in editor</a>
+                <button onClick="{{r.dismiss}}" style="height: 38px; padding: 0 14px; border-radius: 11px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 13px; font-weight: 600; cursor: pointer">{{r.btn}}</button>
+              </div>
+            </div>
+          </sc-for>
+        </section>
+
+        <section style="background: #062A5E; color: #F3F6FA; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+          <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Send a notification</h2>
+          <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #A9BBD8">Audience</span>
+            <select style="height: 42px; border-radius: 12px; border: 1px solid #24508F; background: #0D3672; color: #F3F6FA; padding: 0 10px; font-size: 14px"><option>Free users · Exit exam target (11,204)</option></select>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #A9BBD8">Message</span>
+            <textarea rows="2" style="border-radius: 12px; border: 1px solid #24508F; background: #0D3672; color: #F3F6FA; padding: 10px 12px; font-size: 14px; line-height: 1.45; resize: vertical">Exit Exam 2025 past paper is now live. Try 20 free questions tonight.</textarea>
+          </label>
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+            <span style="font-size: 12px; color: #A9BBD8">Sent in each user’s app language</span>
+            <button style="height: 42px; padding: 0 16px; border-radius: 12px; background: {{accent}}; color: #062A5E; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Schedule</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 'all', done: {} }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const ST = { Active: ['#DDF3F5', '#017F8E'], Pending: ['#FFF3E8', '#8A3412'], Suspended: ['#F3E3E0', '#8A2A1A'], Free: ['#E6EBF2', '#475569'] };
+    const U = [
+      ['Hana Tesfaye', 'HT', 'Medicine · Year 6', 'Addis Ababa University', 'Semester', '1/2', '2 min ago', 'Active'],
+      ['Yonas Getachew', 'YG', 'Medicine · Intern', 'Jimma University', 'Exit pack', '2/2', '14 min ago', 'Active'],
+      ['Bethlehem Alemu', 'BA', 'Medicine · Year 5', 'Addis Ababa University', 'Awaiting receipt', '1/2', '1 h ago', 'Pending'],
+      ['Abdi Mohammed', 'AM', 'Nursing · Year 4', 'Jigjiga University', 'Free', '1/2', '3 h ago', 'Free'],
+      ['Liya Haile', 'LH', 'Medicine · Year 6', 'University of Gondar', 'Yearly', '3/2', 'Yesterday', 'Suspended'],
+      ['Hawi Tadesse', 'HT', 'Pharmacy · Year 5', 'Haramaya University', 'Awaiting receipt', '1/2', 'Yesterday', 'Pending'],
+      ['Samuel Desta', 'SD', 'Medicine · Year 4', 'Hawassa University', 'Monthly', '1/2', '2 days ago', 'Active']
+    ];
+    const T = [['all', 'All', '18,420', null], ['Active', 'Subscribers', '3,912', 'Active'], ['Pending', 'Pending approval', '17', 'Pending'], ['Suspended', 'Suspended', '42', 'Suspended']];
+    const tabs = T.map(([id, label, n]) => {
+      const on = id === this.state.tab;
+      return { label, n, on: on ? 'true' : 'false', pick: () => this.setState({ tab: id }),
+        style: 'height: 36px; padding: 0 12px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') };
+    });
+    const users = U.filter((u) => this.state.tab === 'all' || u[7] === this.state.tab).map((u) => ({
+      name: u[0], ini: u[1], year: u[2], uni: u[3], plan: u[4], dev: u[5], last: u[6], st: u[7],
+      devInk: u[5] === '3/2' ? '#B4441A' : '#062A5E',
+      badge: 'font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 99px; background: ' + ST[u[7]][0] + '; color: ' + ST[u[7]][1]
+    }));
+    const R = [
+      ['Q-02415', 'Wrong answer key', 'A 4-year-old with bloody diarrhoea and low platelets — most likely diagnosis?', 'Answer should be HUS, not TTP. Checked with our pediatrics notes.', '6 reports', '#FFE8D6', '#8A3412'],
+      ['Q-01882', 'Image unclear', 'Chest X-ray: most likely diagnosis in a 30-year-old with fever and cough?', 'The X-ray is too dark on my phone, cannot see the lesion.', '3 reports', '#E4ECFB', '#24418A'],
+      ['Q-00977', 'Translation', 'Amharic version of the pre-eclampsia question', 'Option C translation means something different from English.', '1 report', '#F0E9FB', '#5A3399']
+    ];
+    const reports = R.map((r, i) => {
+      const d = !!this.state.done[i];
+      return { id: r[0], kind: r[1], q: r[2], note: r[3], count: r[4], tagBg: r[5], tagInk: r[6], op: d ? '0.5' : '1', btn: d ? 'Dismissed' : 'Dismiss',
+        dismiss: () => this.setState({ done: { ...this.state.done, [i]: !d } }) };
+    });
+    const openReports = 8 - Object.values(this.state.done).filter(Boolean).length;
+    return { accent, tabs, users, reports, openReports };
+  }
+}
+</script>
+</body>
+</html>

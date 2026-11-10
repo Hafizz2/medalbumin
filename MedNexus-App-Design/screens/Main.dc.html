@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Welcome — choose language</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Noto+Sans+Ethiopic:wght@500;600&family=Noto+Sans+Arabic:wght@500;600&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #062A5E; font-family: 'Geist', 'Noto Sans Ethiopic', 'Noto Sans Arabic', system-ui, sans-serif; color: #062A5E; display: flex; flex-direction: column; overflow: hidden; position: relative">
+  <svg aria-hidden="true" width="390" height="420" viewBox="0 0 390 420" style="position: absolute; top: 0; left: 0">
+    <path d="M0 250 H110 L128 215 L146 290 L166 150 L186 320 L204 250 H390" fill="none" stroke="#1B4A8A" stroke-width="2"></path>
+    <path d="M0 250 H110 L128 215 L146 290 L166 150 L186 320 L204 250 H250" fill="none" stroke="{{accent}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    <circle cx="250" cy="250" r="5" fill="{{accent}}"></circle>
+    <circle cx="250" cy="250" r="14" fill="none" stroke="{{accent}}" stroke-opacity="0.35"></circle>
+  </svg>
+  <div style="position: relative; padding: 64px 28px 0; display: flex; flex-direction: column; gap: 14px; height: 392px; box-sizing: border-box">
+    <div style="display: flex; align-items: center; gap: 10px">
+      <span style="width: 56px; height: 56px; border-radius: 16px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 40px; height: 46px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 12px; color: #A9BBD8">Connect Knowledge. Master Medicine.</span></span>
+    </div>
+    <div style="flex: 1"></div>
+    <h1 dir="{{copy.dir}}" style="margin: 0 0 22px; font-family: 'Outfit', 'Noto Sans Ethiopic', 'Noto Sans Arabic', sans-serif; font-weight: 600; font-size: 38px; line-height: 1.08; letter-spacing: -0.03em; color: #F3F6FA; text-wrap: balance">{{copy.title}}</h1>
+  </div>
+  <div style="flex: 1; background: #F3F6FA; border-radius: 32px 32px 0 0; padding: 26px 22px 30px; display: flex; flex-direction: column; gap: 16px; position: relative">
+    <p dir="{{copy.dir}}" style="margin: 0; font-size: 15px; line-height: 1.45; color: #475569">{{copy.sub}}</p>
+    <div style="display: flex; justify-content: space-between; align-items: baseline">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #56657D">App language</span>
+      <span style="font-size: 12px; color: #56657D">Change anytime</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <sc-for list="{{langs}}" as="l" hint-placeholder-count="5">
+        <button onClick="{{l.pick}}" aria-pressed="{{l.on}}" style="{{l.style}}">
+          <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 1px">
+            <span style="font-size: 16px; font-weight: 600; color: #062A5E">{{l.native}}</span>
+            <span style="font-size: 12px; color: #56657D">{{l.en}}</span>
+          </span>
+          <span style="{{l.dot}}"></span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="flex: 1"></div>
+    <a href="SignIn.dc.html" style="height: 56px; border-radius: 16px; background: #062A5E; color: #F3F6FA; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; font-weight: 600; text-decoration: none">{{copy.cta}}
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { lang: 'am' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const L = [
+      { id: 'en', native: 'English', en: 'English', dir: 'ltr', title: 'Pass your medical exams with confidence.', sub: 'Past papers, mock exams, notes and flashcards — in one calm, focused place.', cta: 'Continue' },
+      { id: 'am', native: 'አማርኛ', en: 'Amharic', dir: 'ltr', title: 'የሕክምና ፈተናዎን በልበ ሙሉነት ያልፉ።', sub: 'ያለፉ ዓመታት ፈተናዎች፣ ሞዴል ፈተናዎች፣ ማስታወሻዎች እና ፍላሽ ካርዶች — በአንድ ቦታ።', cta: 'ቀጥል' },
+      { id: 'om', native: 'Afaan Oromoo', en: 'Oromo', dir: 'ltr', title: 'Qormaata fayyaa ofitti amanamummaan darbaa.', sub: 'Qormaata waggoota darbanii, qormaata fakkeenyaa fi yaadannoo — bakka tokkotti.', cta: 'Itti fufi' },
+      { id: 'so', native: 'Soomaali', en: 'Somali', dir: 'ltr', title: 'Imtixaanadaada caafimaadka si kalsooni leh u gudub.', sub: 'Imtixaanadii sannadihii hore, imtixaanno tijaabo ah iyo qoraallo — hal meel.', cta: 'Sii wad' },
+      { id: 'ar', native: 'العربية', en: 'Arabic', dir: 'rtl', title: 'اجتز امتحاناتك الطبية بثقة.', sub: 'أسئلة السنوات السابقة، امتحانات تجريبية وملخصات — في مكان واحد.', cta: 'متابعة' }
+    ];
+    const cur = L.find((x) => x.id === this.state.lang) || L[0];
+    const langs = L.map((x) => {
+      const on = x.id === this.state.lang;
+      return {
+        ...x, on: on ? 'true' : 'false',
+        pick: () => this.setState({ lang: x.id }),
+        style: 'min-height: 56px; width: 100%; border-radius: 14px; padding: 8px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; background: #FFFFFF; border: 1.5px solid ' + (on ? '#062A5E' : '#E0E6EE'),
+        dot: 'width: 20px; height: 20px; border-radius: 50%; box-sizing: border-box; ' + (on ? 'border: 6px solid #062A5E; background: ' + accent : 'border: 1.5px solid #C3CCDA')
+      };
+    });
+    return { accent, langs, copy: cur };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Internal Medicine — subcategories</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="background: #062A5E; color: #F3F6FA; padding: 52px 20px 20px; border-radius: 0 0 28px 28px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Departments.dc.html" aria-label="Back to departments" style="width: 44px; height: 44px; border-radius: 14px; background: #12407F; display: flex; align-items: center; justify-content: center; color: #F3F6FA"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+      <span style="font-size: 12px; color: #A9BBD8">Study › Department</span>
+      <a href="Notes.dc.html" aria-label="Department notes" style="width: 44px; height: 44px; border-radius: 14px; background: #12407F; display: flex; align-items: center; justify-content: center; color: #F3F6FA"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg></a>
+    </div>
+    <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -0.03em">Internal Medicine</h1>
+    <div style="display: flex; gap: 18px; font-size: 13px; color: #A9BBD8">
+      <span><span style="font-family: 'Geist Mono', monospace; color: #F3F6FA">1,820</span> questions</span>
+      <span><span style="font-family: 'Geist Mono', monospace; color: #F3F6FA">62%</span> done</span>
+      <span><span style="font-family: 'Geist Mono', monospace; color: {{accent}}">71%</span> accuracy</span>
+    </div>
+  </div>
+
+  <div style="padding: 16px 20px 0; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">9 subcategories</h2><span style="font-size: 12px; color: #56657D">Tap to open</span></div>
+    <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; overflow: hidden; display: flex; flex-direction: column">
+      <sc-for list="{{subs}}" as="s" hint-placeholder-count="9">
+        <div style="{{s.wrap}}">
+          <button aria-expanded="{{s.open}}" onClick="{{s.pick}}" style="width: 100%; min-height: 48px; padding: 0 16px; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; gap: 12px; color: #062A5E; text-align: left">
+            <span style="width: 8px; height: 8px; border-radius: 50%; background: {{s.dot}}; flex-shrink: 0"></span>
+            <span style="flex: 1; font-size: 15px; font-weight: {{s.weight}}">{{s.name}}</span>
+            <span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #56657D">{{s.q}} Q</span>
+            <span style="font-family: 'Geist Mono', monospace; font-size: 12px; width: 34px; text-align: right; color: {{s.accInk}}">{{s.acc}}</span>
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#56657D" stroke-width="2.2" stroke-linecap="round" style="{{s.chev}}"><path d="m6 9 6 6 6-6"></path></svg>
+          </button>
+          <sc-if value="{{s.isOpen}}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 0 16px 14px; display: flex; flex-direction: column; gap: 10px">
+              <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                <a href="VideoLesson.dc.html" style="font-size: 12px; font-weight: 600; padding: 5px 10px; border-radius: 99px; background: #062A5E; color: #F3F6FA; text-decoration: none">▶ {{s.vids}} videos</a>
+                <sc-for list="{{s.topics}}" as="t" hint-placeholder-count="5">
+                  <span style="font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D8DFEA">{{t}}</span>
+                </sc-for>
+              </div>
+              <div style="display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 8px">
+                <a href="Question.dc.html" style="height: 46px; border-radius: 13px; background: #062A5E; color: #F3F6FA; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">Practise {{s.q}}</a>
+                <a href="PastPapers.dc.html" style="height: 46px; border-radius: 13px; background: #FFFFFF; border: 1px solid #D8DFEA; color: #062A5E; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; box-sizing: border-box">By year</a>
+                <a href="NoteDetail.dc.html" style="height: 46px; border-radius: 13px; background: #FFFFFF; border: 1px solid #D8DFEA; color: #062A5E; text-decoration: none; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; box-sizing: border-box">Notes · {{s.notes}}</a>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { open: 'neuro' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const S = [
+      ['cardio', 'Cardiology', 260, 82, 5, ['Heart failure', 'ACS', 'Arrhythmias', 'Valvular disease', 'Hypertension']],
+      ['neuro', 'Neurology', 214, 56, 6, ['Stroke', 'Epilepsy', 'Headache', 'Meningitis', 'Neuropathy', 'Parkinson’s']],
+      ['pulm', 'Pulmonology', 228, 74, 4, ['Asthma', 'COPD', 'Pneumonia', 'TB', 'Pleural effusion']],
+      ['gi', 'Gastroenterology & Hepatology', 236, 61, 5, ['Liver disease', 'GI bleeding', 'IBD', 'Pancreatitis']],
+      ['renal', 'Nephrology', 168, 52, 3, ['AKI', 'CKD', 'Nephrotic syndrome', 'Electrolytes']],
+      ['endo', 'Endocrinology', 190, 70, 4, ['Diabetes', 'Thyroid', 'Adrenal', 'DKA']],
+      ['heme', 'Hematology & Oncology', 172, 66, 3, ['Anemia', 'Leukemia', 'Bleeding disorders']],
+      ['id', 'Infectious Diseases', 240, 78, 6, ['HIV', 'Malaria', 'Typhoid', 'Sepsis', 'Visceral leishmaniasis']],
+      ['rheum', 'Rheumatology', 112, 0, 2, ['RA', 'SLE', 'Gout']]
+    ];
+    const subs = S.map(([id, name, q, acc, notes, topics], i) => {
+      const isOpen = id === this.state.open;
+      return { name, q, notes, topics, isOpen, vids: Math.max(2, Math.round(q / 18)), open: isOpen ? 'true' : 'false',
+        pick: () => this.setState({ open: isOpen ? null : id }),
+        acc: acc ? acc + '%' : '—', accInk: !acc ? '#56657D' : acc < 60 ? '#B4441A' : '#017F8E',
+        dot: !acc ? '#C3CCDA' : acc < 60 ? '#D9692F' : '#017F8E',
+        weight: isOpen ? '600' : '500',
+        chev: isOpen ? 'transform: rotate(180deg)' : '',
+        wrap: (i > 0 ? 'border-top: 1px solid #EBEFF5; ' : '') + (isOpen ? 'background: #EDF7F9' : '') };
+    });
+    return { accent, subs };
+  }
+}
+</script>
+</body>
+</html>

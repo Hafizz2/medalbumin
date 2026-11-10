@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Payments and subscriptions</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,input{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="AdminDashboard.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>Dashboard</a>
+      <a href="AdminQuestions.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"></path></svg>Question bank</a>
+      <a href="AdminExams.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2M10 2h4"></path></svg>Exam builder</a>
+      <a href="AdminVideos.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3"></path></svg>Video library</a>
+      <a href="AdminNotes.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg>Departments &amp; notes</a>
+      <a href="AdminMatch.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Match data</a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"></path></svg>Users</a>
+      <a href="AdminPayments.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 600; background: #12407F; color: #F3F6FA"><span style="display: flex; align-items: center; gap: 12px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20M6 15h4"></path></svg>Payments</span><span style="font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: #FBBF77; color: #062A5E">{{pending}}</span></a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><span style="display: flex; align-items: center; gap: 12px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 21v-7M4 14l3-11h13l-3 11z"></path></svg>Reported</span><span style="font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: #12407F; color: #F3F6FA">8</span></a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>Push notifications</a>
+      <a href="AdminCommunity.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Community</a>
+      <a href="AdminAnalytics.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Analytics</a>
+      <a href="AdminSettings.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>Settings</a>
+      <a href="AdminQuestions.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 5h8M8 3v2M5 9c1.5 3 4 5 7 6M11 5c-1 4-3.5 7-7 9M13 21l4-10 4 10M14.5 17h5"></path></svg>Languages</a>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">MK</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Meron K.</span><span style="font-size: 11px; color: #94A6C4">Finance</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">Manual receipts · online gateways · plans</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Payments</h1>
+      </div>
+      <button style="height: 44px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Export report</button>
+    </header>
+
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+      <sc-for list="{{gateways}}" as="g" hint-placeholder-count="4">
+        <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px">
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #475569"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{g.c}}"></span>{{g.name}}</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 22px">{{g.amt}}</span>
+          <span style="font-size: 12px; color: #56657D">{{g.n}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <div style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <div style="padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #EBEFF5"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Receipt queue</h2><span style="font-size: 12px; color: #56657D">{{pending}} waiting</span></div>
+        <sc-for list="{{queue}}" as="q" hint-placeholder-count="6">
+          <button onClick="{{q.pick}}" style="{{q.style}}">
+            <span style="width: 38px; height: 38px; border-radius: 50%; background: #D7E4F2; color: #017F8E; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; flex-shrink: 0">{{q.ini}}</span>
+            <span style="flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0"><span style="font-size: 14px; font-weight: 600">{{q.name}}</span><span style="font-size: 12px; color: #56657D">{{q.meta}}</span></span>
+            <span style="{{q.badge}}">{{q.st}}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <section aria-label="Receipt detail" style="flex: 2 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 22px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 22px">
+        <div style="flex: 1 1 240px; min-height: 360px; border-radius: 18px; background: #ECF0F6; display: flex; align-items: center; justify-content: center; padding: 20px">
+          <div style="width: 220px; background: #FFFFFF; border-radius: 10px; box-shadow: 0 10px 30px rgba(6,42,94,0.12); padding: 18px; display: flex; flex-direction: column; gap: 10px; transform: rotate(-2deg)">
+            <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #6B2C91">TRANSFER RECEIPT</span>
+            <span style="height: 1px; background: #EBEFF5"></span>
+            <span style="display: flex; justify-content: space-between; font-size: 11px; color: #56657D"><span>Amount</span><span style="font-family: 'Geist Mono', monospace; color: #062A5E">ETB {{cur.amt}}</span></span>
+            <span style="display: flex; justify-content: space-between; font-size: 11px; color: #56657D"><span>Reference</span><span style="font-family: 'Geist Mono', monospace; color: #062A5E">{{cur.ref}}</span></span>
+            <span style="display: flex; justify-content: space-between; font-size: 11px; color: #56657D"><span>Date</span><span style="font-family: 'Geist Mono', monospace; color: #062A5E">13/10/2026</span></span>
+            <span style="height: 34px; border-radius: 6px; background: repeating-linear-gradient(90deg, #062A5E 0 2px, transparent 2px 5px)"></span>
+            <span style="font-size: 10px; color: #677489; text-align: center">Uploaded photo · tap to enlarge</span>
+          </div>
+        </div>
+        <div style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 16px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <span style="{{cur.badge}}; align-self: flex-start">{{cur.st}}</span>
+            <h2 style="margin: 6px 0 0; font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -0.02em">{{cur.name}}</h2>
+            <span style="font-size: 13px; color: #56657D">{{cur.phone}} · {{cur.uni}}</span>
+          </div>
+          <dl style="margin: 0; display: grid; grid-template-columns: 120px 1fr; gap: 10px 12px; font-size: 14px">
+            <dt style="color: #56657D">Plan</dt><dd style="margin: 0; font-weight: 600">{{cur.plan}}</dd>
+            <dt style="color: #56657D">Expected</dt><dd style="margin: 0; font-family: 'Geist Mono', monospace">ETB {{cur.amt}}</dd>
+            <dt style="color: #56657D">Paid via</dt><dd style="margin: 0">{{cur.via}}</dd>
+            <dt style="color: #56657D">Submitted</dt><dd style="margin: 0">{{cur.ago}}</dd>
+          </dl>
+          <div style="padding: 12px 14px; border-radius: 14px; background: #EDF7F9; font-size: 13px; color: #015A66; display: flex; gap: 8px; align-items: flex-start"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px"><path d="m5 12 5 5 9-10"></path></svg>Amount matches the plan price. Reference not used before.</div>
+          <div style="flex: 1"></div>
+          <div style="display: flex; gap: 10px">
+            <button onClick="{{reject}}" style="flex: 1; height: 50px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; color: #8A3412; font-size: 15px; font-weight: 600; cursor: pointer">Reject</button>
+            <button onClick="{{approve}}" style="flex: 2; height: 50px; border-radius: 14px; background: #017F8E; color: #FFFFFF; border: 0; font-size: 15px; font-weight: 600; cursor: pointer">Approve &amp; activate plan</button>
+          </div>
+          <span style="font-size: 12px; color: #56657D">Student gets a push notification and SMS when you decide.</span>
+        </div>
+      </section>
+    </div>
+
+    <section style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Subscription plans</h2><button style="height: 38px; padding: 0 14px; border-radius: 12px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 13px; font-weight: 600; cursor: pointer">Add plan</button></div>
+      <div style="overflow-x: auto">
+        <div style="min-width: 640px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; font-size: 14px">
+          <span style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #56657D">Plan</span><span style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #56657D">Duration</span><span style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #56657D">Price</span><span style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #56657D">Subscribers</span><span style="padding: 10px 0; font-size: 12px; font-weight: 600; color: #56657D">Status</span>
+          <sc-for list="{{plans}}" as="p" hint-placeholder-count="4">
+            <span style="padding: 12px 0; border-top: 1px solid #EBEFF5; font-weight: 600">{{p.n}}</span><span style="padding: 12px 0; border-top: 1px solid #EBEFF5">{{p.d}}</span><span style="padding: 12px 0; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace">{{p.p}}</span><span style="padding: 12px 0; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace">{{p.s}}</span><span style="padding: 12px 0; border-top: 1px solid #EBEFF5; color: #017F8E; font-weight: 600">Live</span>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 0, decided: {} }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const Q = [
+      ['Bethlehem Alemu', 'BA', '+251 91 *** 4471', 'Addis Ababa University', 'Semester', '[PRICE]', 'CBE bank transfer', 'FT26286XK31', '3 h 20 m ago'],
+      ['Yonas Getachew', 'YG', '+251 92 *** 1198', 'Jimma University', 'Exit pack', '[PRICE]', 'Awash bank transfer', 'AW-889120', '2 h 05 m ago'],
+      ['Hawi Tadesse', 'HT', '+251 93 *** 7720', 'Haramaya University', 'Monthly', '[PRICE]', 'Dashen bank transfer', 'DB7781023', '1 h 40 m ago'],
+      ['Abdi Mohammed', 'AM', '+251 94 *** 3012', 'Jigjiga University', 'Yearly', '[PRICE]', 'CBE bank transfer', 'FT26286PL90', '58 m ago'],
+      ['Ruth Bekele', 'RB', '+251 91 *** 8834', 'University of Gondar', 'Semester', '[PRICE]', 'Abyssinia bank transfer', 'BOA-55102', '21 m ago']
+    ];
+    const ST = { Pending: ['#FFF3E8', '#8A3412'], Approved: ['#DDF3F5', '#017F8E'], Rejected: ['#F3E3E0', '#8A2A1A'] };
+    const status = (i) => this.state.decided[i] || 'Pending';
+    const badge = (s) => 'font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 99px; background: ' + ST[s][0] + '; color: ' + ST[s][1];
+    const queue = Q.map((q, i) => {
+      const on = i === this.state.sel; const s = status(i);
+      return { name: q[0], ini: q[1], meta: q[4] + ' · ' + q[8], st: s, badge: badge(s), pick: () => this.setState({ sel: i }),
+        style: 'width: 100%; border: 0; cursor: pointer; min-height: 64px; padding: 10px 18px; display: flex; align-items: center; gap: 12px; text-align: left; color: #062A5E; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5; ' : '') + (on ? 'background: #EDF7F9; box-shadow: inset 3px 0 0 #017F8E' : 'background: #FFFFFF') };
+    });
+    const c = Q[this.state.sel]; const s = status(this.state.sel);
+    const cur = { name: c[0], phone: c[2], uni: c[3], plan: c[4], amt: c[5], via: c[6], ref: c[7], ago: c[8], st: s, badge: badge(s) };
+    const decide = (v) => () => {
+      const d = { ...this.state.decided, [this.state.sel]: v };
+      const next = Q.findIndex((_, i) => !d[i]);
+      this.setState({ decided: d, sel: next === -1 ? this.state.sel : next });
+    };
+    const pending = 12 - Object.keys(this.state.decided).length;
+    const gateways = [
+      { name: 'Telebirr', c: '#0E6FB8', amt: 'ETB 345K', n: '2,780 payments' },
+      { name: 'CBE Birr', c: '#6B2C91', amt: 'ETB 72K', n: '584 payments' },
+      { name: 'Chapa', c: '#3F7F2A', amt: 'ETB 41K', n: '330 payments' },
+      { name: 'Bank receipts', c: '#475569', amt: 'ETB 28K', n: '218 approved' }
+    ];
+    const plans = [{ n: 'Monthly', d: '30 days', p: 'ETB [PRICE]', s: '1,204' }, { n: 'Semester', d: '6 months', p: 'ETB [PRICE]', s: '1,688' }, { n: 'Yearly', d: '12 months', p: 'ETB [PRICE]', s: '611' }, { n: 'Exit exam pack', d: 'Until exam day', p: 'ETB [PRICE]', s: '409' }];
+    return { accent, queue, cur, gateways, plans, pending, approve: decide('Approved'), reject: decide('Rejected') };
+  }
+}
+</script>
+</body>
+</html>

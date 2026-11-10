@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Match predictor — your score</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,input,select{font:inherit}
+input[type=range]{accent-color:#017F8E}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 52px 20px 120px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <a href="Home.dc.html" aria-label="Back" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; color: #062A5E; flex-shrink: 0"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 12px; font-weight: 600; color: #56657D">Step 1 of 3 · Your score</span>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px"><span style="height: 4px; border-radius: 99px; background: #062A5E"></span><span style="height: 4px; border-radius: 99px; background: #D8DFEA"></span><span style="height: 4px; border-radius: 99px; background: #D8DFEA"></span></div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05">What’s your score?</h1>
+      <p style="margin: 0; font-size: 14px; line-height: 1.45; color: #475569">Your residency entrance exam score (average of Part I and II). Not taken it yet? Enter the score you expect.</p>
+    </div>
+
+    <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <button onClick="{{dec}}" aria-label="Decrease score" style="width: 52px; height: 52px; border-radius: 16px; border: 1px solid #D8DFEA; background: #F3F6FA; font-size: 24px; cursor: pointer">−</button>
+        <span style="display: flex; align-items: baseline; gap: 2px"><span style="font-family: 'Outfit', sans-serif; font-size: 64px; font-weight: 700; letter-spacing: -0.04em; line-height: 1">{{score}}</span><span style="font-size: 22px; font-weight: 600; color: #56657D">%</span></span>
+        <button onClick="{{inc}}" aria-label="Increase score" style="width: 52px; height: 52px; border-radius: 16px; border: 1px solid #D8DFEA; background: #F3F6FA; font-size: 24px; cursor: pointer">+</button>
+      </div>
+      <label style="display: flex; flex-direction: column; gap: 4px">
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Score</span>
+        <input type="range" min="40" max="100" value="{{score}}" onChange="{{setScore}}" style="width: 100%; height: 28px; margin: 0">
+      </label>
+      <button onClick="{{usePredicted}}" style="min-height: 44px; border-radius: 14px; border: 0; background: #EDF7F9; color: #015A66; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Use my predicted score from 9 mocks · 71%</button>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #56657D">Extra points (official rules)</span>
+      <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; overflow: hidden">
+        <sc-for list="{{bonuses}}" as="b" hint-placeholder-count="2">
+          <button role="switch" aria-checked="{{b.on}}" onClick="{{b.pick}}" style="{{b.row}}">
+            <span style="display: flex; flex-direction: column; gap: 2px; align-items: flex-start; text-align: left"><span style="font-size: 15px; font-weight: 500">{{b.label}}</span><span style="font-size: 12px; color: #56657D">{{b.sub}}</span></span>
+            <span style="{{b.track}}"><span style="width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.2)"></span></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="background: #062A5E; color: #F3F6FA; border-radius: 20px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between">
+      <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 13px; color: #A9BBD8">Your matching score</span><span style="font-size: 12px; color: #94A6C4">{{breakdown}}</span></span>
+      <span style="font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 700; color: {{accent}}">{{final}}</span>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px 30px; background: #F3F6FA; border-top: 1px solid #E0E6EE">
+    <a href="MatchSpecialty.dc.html" style="height: 56px; border-radius: 16px; background: #062A5E; color: #F3F6FA; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 600; font-size: 16px">Next: choose specialties<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { score: 74, female: true, manager: false }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const s = this.state.score;
+    const clamp = (v) => Math.max(40, Math.min(100, v));
+    const B = [['female', 'Female candidate', '+5% of your total mark'], ['manager', 'Managerial post ≥ 1 year as GP', '+5% · needs a supporting letter']];
+    const bonuses = B.map(([id, label, sub], i) => {
+      const on = !!this.state[id];
+      return { label, sub, on: on ? 'true' : 'false', pick: () => this.setState({ [id]: !on }),
+        row: 'width: 100%; min-height: 62px; padding: 8px 16px; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #062A5E; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : ''),
+        track: 'width: 46px; height: 28px; border-radius: 99px; padding: 3px; box-sizing: border-box; display: flex; flex-shrink: 0; justify-content: ' + (on ? 'flex-end; background: #017F8E' : 'flex-start; background: #CFD7E3') };
+    });
+    const k = (this.state.female ? 1 : 0) + (this.state.manager ? 1 : 0);
+    const final = (s * (1 + 0.05 * k)).toFixed(1);
+    return {
+      accent, score: s, bonuses, final,
+      breakdown: k ? s + '% + ' + (k * 5) + '% bonus' : 'No bonus applied',
+      dec: () => this.setState({ score: clamp(s - 1) }), inc: () => this.setState({ score: clamp(s + 1) }),
+      setScore: (e) => this.setState({ score: Number(e.target.value) }),
+      usePredicted: () => this.setState({ score: 71 })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Flashcards</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 58px 20px 110px; display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">Internal Medicine › Toxicology</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: -0.03em">Flashcards</h1>
+      </div>
+      <span style="font-size: 12px; font-weight: 600; padding: 6px 10px; border-radius: 99px; background: #FFE8D6; color: #B4441A">{{due}} due today</span>
+    </div>
+
+    <div style="display: flex; gap: 6px">
+      <sc-for list="{{dots}}" as="d" hint-placeholder-count="8">
+        <span style="flex: 1; height: 4px; border-radius: 99px; background: {{d.bg}}"></span>
+      </sc-for>
+    </div>
+
+    <div style="position: relative; height: 392px; margin-top: 10px">
+      <div style="position: absolute; left: 24px; right: 24px; top: -16px; height: 100%; border-radius: 28px; background: #D7E4F2"></div>
+      <div style="position: absolute; left: 12px; right: 12px; top: -8px; height: 100%; border-radius: 28px; background: #E8EDE6"></div>
+      <button onClick="{{flip}}" aria-label="{{flipLabel}}" style="{{cardStyle}}">
+        <span style="display: flex; justify-content: space-between; width: 100%; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.7"><span>{{side}}</span><span style="font-family: 'Geist Mono', monospace; letter-spacing: 0">{{pos}}</span></span>
+        <span style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 14px; text-align: left; width: 100%">
+          <span style="font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 600; line-height: 1.12; letter-spacing: -0.025em; text-wrap: balance">{{main}}</span>
+          <span style="font-size: 15px; line-height: 1.5; opacity: 0.78">{{sub}}</span>
+        </span>
+        <span style="font-size: 13px; opacity: 0.6; display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M21 12a9 9 0 0 1-15 6.7L3 16M3 21v-5h5"></path></svg>Tap card to flip</span>
+      </button>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{rates}}" as="r" hint-placeholder-count="4">
+        <button onClick="{{r.pick}}" style="{{r.style}}"><span style="font-weight: 600; font-size: 14px">{{r.label}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 11px; opacity: 0.75">{{r.t}}</span></button>
+      </sc-for>
+    </div>
+  </div>
+
+  <nav aria-label="Main" style="position: absolute; left: 12px; right: 12px; bottom: 22px; height: 68px; border-radius: 24px; background: #062A5E; display: flex; align-items: center; justify-content: space-around; padding: 0 6px">
+    <a href="Home.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"></path></svg>Home</a>
+    <a href="Departments.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; background: #12407F; color: {{accent}}; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"></path><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"></path></svg>Study</a>
+    <a href="Progress.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Progress</a>
+    <a href="Notes.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg>Notes</a>
+    <a href="Profile.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Profile</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { i: 0, back: false }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const C = [
+      ['Paracetamol overdose', 'What is the antidote, and when is it most effective?', 'N-acetylcysteine (NAC)', 'Replenishes glutathione. Best within 8 hours of ingestion; give it if in doubt.'],
+      ['Organophosphate poisoning', 'First-line antidote pair?', 'Atropine + pralidoxime', 'Atropine blocks muscarinic effects; pralidoxime reactivates cholinesterase.'],
+      ['Opioid overdose', 'Antidote and route?', 'Naloxone', 'IV, IM or intranasal. Short half-life — watch for re-sedation.'],
+      ['Warfarin over-anticoagulation', 'Reversal agents?', 'Vitamin K ± FFP / PCC', 'Vitamin K for slow reversal; PCC or FFP when bleeding.'],
+      ['Benzodiazepine overdose', 'Specific antidote?', 'Flumazenil', 'Use with care: can trigger seizures in chronic users.'],
+      ['Iron poisoning', 'Chelating agent?', 'Deferoxamine', 'IV infusion; urine may turn “vin rosé” coloured.'],
+      ['Heparin overdose', 'Reversal agent?', 'Protamine sulfate', '1 mg neutralises about 100 units of heparin.'],
+      ['Methanol poisoning', 'Antidote?', 'Fomepizole or ethanol', 'Blocks alcohol dehydrogenase; consider dialysis.']
+    ];
+    const i = this.state.i % C.length, back = this.state.back, c = C[i];
+    const dots = C.map((_, k) => ({ bg: k < i ? '#017F8E' : k === i ? '#062A5E' : '#D8DFEA' }));
+    const go = () => this.setState({ i: this.state.i + 1, back: false });
+    const R = [['Again', '1m', '#FFE8D6', '#8A3412'], ['Hard', '8m', '#FFFFFF', '#062A5E'], ['Good', '1d', '#FFFFFF', '#062A5E'], ['Easy', '4d', '#DDF3F5', '#017F8E']];
+    const rates = R.map(([label, t, bg, ink]) => ({ label, t, pick: go,
+      style: 'height: 60px; border-radius: 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: 1px solid ' + (bg === '#FFFFFF' ? '#D8DFEA' : bg) + '; background: ' + bg + '; color: ' + ink + '; opacity: ' + (back ? '1' : '0.45') }));
+    return {
+      accent, dots, rates, due: 30 - i,
+      pos: (i + 1) + ' / ' + C.length,
+      side: back ? 'Answer' : 'Question',
+      main: back ? c[2] : c[0], sub: back ? c[3] : c[1],
+      flip: () => this.setState({ back: !back }), flipLabel: back ? 'Show question' : 'Show answer',
+      cardStyle: 'position: absolute; inset: 0; border-radius: 28px; padding: 22px; box-sizing: border-box; cursor: pointer; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; border: 0; box-shadow: 0 18px 40px rgba(6,42,94,0.12); ' + (back ? 'background: #062A5E; color: #F3F6FA' : 'background: #FFFFFF; color: #062A5E')
+    };
+  }
+}
+</script>
+</body>
+</html>

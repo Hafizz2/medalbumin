@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Custom quiz builder</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 54px 20px 120px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Home.dc.html" aria-label="Back" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; color: #062A5E"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+      <span style="font-size: 14px; font-weight: 600">Build a quiz</span>
+      <button style="height: 44px; padding: 0 12px; border: 0; background: transparent; color: #017F8E; font-size: 14px; font-weight: 600; cursor: pointer">Reset</button>
+    </div>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Subjects</h2><span style="font-size: 12px; color: #56657D">{{subjCount}}</span></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <sc-for list="{{subjects}}" as="s" hint-placeholder-count="8">
+          <button aria-pressed="{{s.on}}" onClick="{{s.pick}}" style="{{s.style}}">{{s.label}} <span style="font-family: 'Geist Mono', monospace; font-size: 11px; opacity: 0.7">{{s.n}}</span></button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Number of questions</h2>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{sizes}}" as="z" hint-placeholder-count="4">
+          <button aria-pressed="{{z.on}}" onClick="{{z.pick}}" style="{{z.style}}">{{z.n}}</button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Mode</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{modes}}" as="m" hint-placeholder-count="2">
+          <button aria-pressed="{{m.on}}" onClick="{{m.pick}}" style="{{m.style}}">
+            <span style="font-weight: 600; font-size: 15px">{{m.label}}</span>
+            <span style="font-size: 12px; line-height: 1.35; opacity: 0.8">{{m.desc}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Question pool</h2>
+      <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; display: flex; flex-direction: column">
+        <sc-for list="{{pools}}" as="q" hint-placeholder-count="4">
+          <button aria-pressed="{{q.on}}" onClick="{{q.pick}}" style="{{q.style}}">
+            <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 1px"><span style="font-size: 15px; font-weight: 500">{{q.label}}</span><span style="font-size: 12px; color: #56657D">{{q.n}}</span></span>
+            <span style="{{q.box}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span>
+          </button>
+        </sc-for>
+      </div>
+    </section>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px 30px; background: #F3F6FA; border-top: 1px solid #E0E6EE">
+    <a href="Question.dc.html" style="height: 56px; border-radius: 16px; background: #062A5E; color: #F3F6FA; text-decoration: none; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; font-weight: 600; font-size: 16px">
+      <span>Start {{size}} questions</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 13px; color: {{accent}}">≈ {{mins}} min</span>
+    </a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { subj: { cardio: true, pharm: true }, size: 20, mode: 'practice', pool: { unused: true, wrong: true } }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const S = [['cardio', 'Cardiology', 640], ['resp', 'Respiratory', 410], ['gi', 'Gastro', 520], ['renal', 'Renal', 300], ['neuro', 'Neurology', 380], ['peds', 'Pediatrics', 700], ['obgyn', 'OB/GYN', 690], ['surg', 'Surgery', 810], ['pharm', 'Pharmacology', 560], ['ph', 'Public health', 330]];
+    const subjects = S.map(([id, label, n]) => {
+      const on = !!this.state.subj[id];
+      return { label, n, on: on ? 'true' : 'false',
+        pick: () => this.setState({ subj: { ...this.state.subj, [id]: !on } }),
+        style: 'min-height: 40px; padding: 0 14px; border-radius: 99px; cursor: pointer; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') };
+    });
+    const sizes = [10, 20, 40, 60].map((n) => {
+      const on = n === this.state.size;
+      return { n, on: on ? 'true' : 'false', pick: () => this.setState({ size: n }),
+        style: 'height: 48px; border-radius: 14px; cursor: pointer; font-family: Geist Mono, monospace; font-size: 16px; ' + (on ? 'background: #017F8E; color: #FFFFFF; border: 1px solid #017F8E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') };
+    });
+    const modes = [['practice', 'Practice', 'See the answer and explanation after each question.'], ['timed', 'Timed exam', 'Countdown timer. Results and review at the end.']].map(([id, label, desc]) => {
+      const on = id === this.state.mode;
+      return { label, desc, on: on ? 'true' : 'false', pick: () => this.setState({ mode: id }),
+        style: 'text-align: left; padding: 14px; border-radius: 18px; cursor: pointer; display: flex; flex-direction: column; gap: 6px; min-height: 96px; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') };
+    });
+    const P = [['unused', 'Unused', '3,912 questions'], ['wrong', 'Answered wrong', '46 questions'], ['flag', 'Bookmarked', '23 questions'], ['all', 'All questions', '5,340 questions']];
+    const pools = P.map(([id, label, n], i) => {
+      const on = !!this.state.pool[id];
+      return { label, n, on: on ? 'true' : 'false', pick: () => this.setState({ pool: { ...this.state.pool, [id]: !on } }),
+        style: 'min-height: 60px; padding: 8px 16px; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: space-between; color: #062A5E; text-align: left; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : ''),
+        box: 'width: 24px; height: 24px; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; ' + (on ? 'background: #017F8E' : 'border: 1.5px solid #C3CCDA; background: #FFFFFF') };
+    });
+    const n = Object.values(this.state.subj).filter(Boolean).length;
+    return { accent, subjects, sizes, modes, pools, size: this.state.size, mins: Math.round(this.state.size * 1.2), subjCount: n + ' selected' };
+  }
+}
+</script>
+</body>
+</html>

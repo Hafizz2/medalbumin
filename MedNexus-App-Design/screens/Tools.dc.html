@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lab values, calculators and drugs</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 52px 20px 30px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Question.dc.html" aria-label="Back to question" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; color: #062A5E"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"></path></svg></a>
+      <span style="font-size: 12px; color: #56657D">Opens over any question</span>
+    </div>
+    <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -0.03em">Quick reference</h1>
+    <div role="tablist" aria-label="Tool" style="display: flex; gap: 6px; background: #E6EBF2; padding: 4px; border-radius: 14px">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+        <button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{isLab}}" hint-placeholder-val="{{ true }}">
+      <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; overflow: hidden">
+        <sc-for list="{{labs}}" as="l" hint-placeholder-count="9">
+          <div style="{{l.row}}"><span style="flex: 1; font-size: 14px; font-weight: 500">{{l.n}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 13px">{{l.v}}</span><span style="font-size: 11px; color: #56657D; width: 70px; text-align: right">{{l.u}}</span></div>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isCalc}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div style="display: flex; gap: 6px; flex-wrap: wrap">
+          <span style="font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 99px; background: #062A5E; color: #F3F6FA">CURB-65</span>
+          <span style="font-size: 12px; font-weight: 500; padding: 7px 11px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D8DFEA">GCS</span>
+          <span style="font-size: 12px; font-weight: 500; padding: 7px 11px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D8DFEA">APGAR</span>
+          <span style="font-size: 12px; font-weight: 500; padding: 7px 11px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D8DFEA">Bishop</span>
+          <span style="font-size: 12px; font-weight: 500; padding: 7px 11px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D8DFEA">BMI</span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; overflow: hidden">
+          <sc-for list="{{curb}}" as="c" hint-placeholder-count="5">
+            <button role="checkbox" aria-checked="{{c.on}}" onClick="{{c.pick}}" style="{{c.row}}"><span style="{{c.box}}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></span><span style="font-weight: 700; width: 18px">{{c.k}}</span><span style="flex: 1; text-align: left; font-size: 14px">{{c.t}}</span></button>
+          </sc-for>
+        </div>
+        <div style="background: #062A5E; color: #F3F6FA; border-radius: 18px; padding: 14px 16px; display: flex; align-items: center; gap: 14px">
+          <span style="font-family: 'Outfit', sans-serif; font-size: 40px; font-weight: 700; color: {{scoreInk}}">{{score}}</span>
+          <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">{{risk}}</span><span style="font-size: 12px; color: #A9BBD8">{{advice}}</span></span>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isDrug}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{drugs}}" as="d" hint-placeholder-count="3">
+          <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
+            <span style="display: flex; justify-content: space-between"><span style="font-size: 15px; font-weight: 600">{{d.n}}</span><span style="font-size: 11px; color: #56657D">{{d.c}}</span></span>
+            <span style="font-size: 13px; line-height: 1.5; color: #2A3A55">{{d.dose}}</span>
+            <span style="font-size: 12px; color: #B4441A">{{d.watch}}</span>
+          </div>
+        </sc-for>
+        <span style="font-size: 11px; color: #56657D">Checked by our medical team against the national treatment guideline. For exam study, not patient care.</span>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 'lab', curb: { u: true, a: true } }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const tab = this.state.tab;
+    const tabs = [['lab', 'Lab values'], ['calc', 'Calculators'], ['drug', 'Drugs']].map(([id, label]) => {
+      const on = id === tab;
+      return { label, on: on ? 'true' : 'false', pick: () => this.setState({ tab: id }),
+        style: 'flex: 1; height: 40px; border: 0; border-radius: 11px; cursor: pointer; font-size: 14px; font-weight: ' + (on ? '600; background: #FFFFFF; color: #062A5E' : '500; background: transparent; color: #475569') };
+    });
+    const L = [['Sodium', '135–145', 'mmol/L'], ['Potassium', '3.5–5.0', 'mmol/L'], ['Creatinine', '0.6–1.2', 'mg/dL'], ['Fasting glucose', '70–100', 'mg/dL'], ['Hemoglobin (M)', '13.5–17.5', 'g/dL'], ['Hemoglobin (F)', '12.0–15.5', 'g/dL'], ['WBC', '4–11', '×10⁹/L'], ['Platelets', '150–400', '×10⁹/L'], ['pH (arterial)', '7.35–7.45', '']];
+    const labs = L.map(([n, v, u], i) => ({ n, v, u, row: 'display: flex; align-items: center; gap: 10px; padding: 0 16px; min-height: 48px; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : '') }));
+    const C = [['c', 'C', 'New confusion'], ['u', 'U', 'Urea > 7 mmol/L'], ['r', 'R', 'Respiratory rate ≥ 30/min'], ['b', 'B', 'SBP < 90 or DBP ≤ 60 mmHg'], ['a', '65', 'Age ≥ 65 years']];
+    const st = this.state.curb;
+    const curb = C.map(([id, k, t], i) => {
+      const on = !!st[id];
+      return { k, t, on: on ? 'true' : 'false', pick: () => this.setState({ curb: { ...st, [id]: !on } }),
+        box: 'width: 24px; height: 24px; border-radius: 8px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: #017F8E' : 'background: #FFFFFF; border: 1.5px solid #C3CCDA; box-sizing: border-box'),
+        row: 'width: 100%; min-height: 50px; padding: 0 14px; border: 0; background: transparent; cursor: pointer; display: flex; align-items: center; gap: 12px; color: #062A5E; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : '') };
+    });
+    const score = Object.values(st).filter(Boolean).length;
+    const risk = score <= 1 ? 'Low risk' : score === 2 ? 'Moderate risk' : 'High risk';
+    const advice = score <= 1 ? 'Consider outpatient treatment' : score === 2 ? 'Consider hospital admission' : 'Manage as severe pneumonia; assess for ICU';
+    const drugs = [
+      { n: 'Magnesium sulfate', c: 'OB/GYN · eclampsia', dose: 'Pritchard: 4 g IV slowly + 10 g IM (5 g each buttock), then 5 g IM every 4 h.', watch: 'Before each dose: knee reflex present, RR > 12, urine > 30 ml/h. Antidote: calcium gluconate.' },
+      { n: 'Paracetamol (children)', c: 'Pediatrics · analgesic', dose: '15 mg/kg every 6 h. Maximum 60 mg/kg per day.', watch: 'Overdose antidote: N-acetylcysteine.' },
+      { n: 'Naloxone', c: 'Emergency · opioid overdose', dose: '0.4–2 mg IV, repeat every 2–3 min as needed.', watch: 'Short-acting: watch for re-sedation.' }
+    ];
+    return { accent, tabs, labs, curb, score, risk, advice, drugs, scoreInk: score <= 1 ? accent : score === 2 ? '#FBBF77' : '#F28C5B',
+      isLab: tab === 'lab', isCalc: tab === 'calc', isDrug: tab === 'drug' };
+  }
+}
+</script>
+</body>
+</html>

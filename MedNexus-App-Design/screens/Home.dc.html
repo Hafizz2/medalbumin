@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 50px 20px 110px; display: flex; flex-direction: column; gap: 9px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <div style="display: flex; align-items: center; gap: 9px">
+        <span style="width: 40px; height: 40px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+        <span style="display: flex; flex-direction: column; gap: 1px">
+          <span style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.1"><span style="color: #062A5E">Med</span><span style="color: #017F8E">Nexus</span></span>
+          <span style="font-size: 10.5px; color: #56657D; white-space: nowrap">Connect Knowledge. Master Medicine.</span>
+        </span>
+      </div>
+      <div style="display: flex; gap: 6px; align-items: center">
+        <a href="Notifications.dc.html" aria-label="Notifications" style="width: 40px; height: 40px; border-radius: 12px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; position: relative; color: #062A5E"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg><span style="position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: #E2622F; border: 2px solid #FFFFFF"></span></a>
+        <a href="Profile.dc.html" aria-label="Profile" style="width: 40px; height: 40px; border-radius: 50%; background: #D7E4F2; color: #017F8E; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; text-decoration: none">HT</a>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -0.02em">Good evening, Hana</h1>
+      <span style="font-size: 13px; color: #56657D">Your goal is within reach. Keep going!</span>
+    </div>
+
+    <div style="background: #062A5E; border-radius: 24px; padding: 15px 16px; color: #FFFFFF; display: flex; flex-direction: column; gap: 11px">
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <span style="font-size: 13px; font-weight: 600; color: #C5D3EA">Exam readiness</span>
+        <span style="font-size: 12px; font-weight: 500; padding: 5px 10px; border-radius: 99px; background: #12407F; color: #A3E4E8">Exit exam · 42 days</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 18px">
+        <svg role="img" aria-label="Exam readiness 68 percent" width="74" height="74" viewBox="0 0 92 92">
+          <circle cx="46" cy="46" r="38" fill="none" stroke="#1B4A8A" stroke-width="9"></circle>
+          <circle cx="46" cy="46" r="38" fill="none" stroke="{{accent}}" stroke-width="9" stroke-linecap="round" stroke-dasharray="162.4 238.8" transform="rotate(-90 46 46)"></circle>
+          <text x="46" y="53" text-anchor="middle" font-family="Outfit, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">68%</text>
+        </svg>
+        <div style="display: flex; flex-direction: column; gap: 5px">
+          <span style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; color: {{accent}}; display: flex; align-items: center; gap: 6px">On track <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg></span>
+          <span style="font-size: 13px; color: #A9BBD8; line-height: 1.4">You’re improving. Focus on Neurology and Nephrology next.</span>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-top: 10px; border-top: 1px solid #1B4A8A">
+        <sc-for list="{{stats}}" as="s" hint-placeholder-count="3">
+          <span style="display: flex; flex-direction: column; gap: 3px">
+            <span style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="{{s.ink}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{s.d}}"></path></svg><span style="font-family: 'Geist Mono', monospace; font-size: 16px; color: {{s.ink}}">{{s.v}}</span></span>
+            <span style="font-size: 11px; color: #94A6C4">{{s.l}}</span>
+          </span>
+        </sc-for>
+      </div>
+    </div>
+
+    <a href="StudyPlan.dc.html" style="background: #DDF3F5; border-radius: 18px; padding: 12px 14px; text-decoration: none; color: #062A5E; display: flex; align-items: center; gap: 12px">
+      <span style="width: 40px; height: 40px; border-radius: 12px; background: #017F8E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18M8 15l2 2 4-4"></path></svg></span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">Study plan for today</span><span style="font-size: 12px; color: #015A66">3 sessions · 1 h 45 m · made by AI for you</span></span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg>
+    </a>
+
+    <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Quick actions</h2><a href="Departments.dc.html" style="font-size: 13px; font-weight: 600">See all</a></div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{tiles}}" as="t" hint-placeholder-count="6">
+        <a href="{{t.href}}" style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 16px; padding: 11px; text-decoration: none; color: #062A5E; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; min-height: 80px; box-sizing: border-box">
+          <span style="width: 32px; height: 32px; border-radius: 10px; background: {{t.iconBg}}; color: {{t.iconInk}}; display: flex; align-items: center; justify-content: center">
+            <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{t.d}}"></path></svg>
+          </span>
+          <span style="display: flex; flex-direction: column; gap: 1px"><span style="font-weight: 600; font-size: 13px; line-height: 1.2; white-space: nowrap">{{t.label}}</span><span style="font-size: 11px; color: #56657D; white-space: nowrap">{{t.sub}}</span></span>
+        </a>
+      </sc-for>
+    </div>
+
+    <a href="LiveMock.dc.html" style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; padding: 9px 14px; text-decoration: none; color: #062A5E; display: flex; align-items: center; gap: 12px">
+      <span style="width: 42px; height: 42px; border-radius: 12px; background: #F0E9FB; color: #6B3FB8; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0"><span style="font-size: 9px; font-weight: 700">SAT</span><span style="font-family: 'Geist Mono', monospace; font-size: 15px; line-height: 1">18</span></span>
+      <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #56657D">Upcoming</span><span style="font-weight: 600; font-size: 14px">Grand Mock #12 · 9:00 AM</span></span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg>
+    </a>
+  </div>
+
+  <nav aria-label="Main" style="position: absolute; left: 12px; right: 12px; bottom: 22px; height: 68px; border-radius: 24px; background: #062A5E; display: flex; align-items: center; justify-content: space-around; padding: 0 6px">
+    <a href="Home.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; background: #12407F; color: {{accent}}; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 600"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"></path></svg>Home</a>
+    <a href="Departments.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"></path><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"></path></svg>Study</a>
+    <a href="Progress.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Progress</a>
+    <a href="Notes.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg>Notes</a>
+    <a href="Profile.dc.html" style="min-width: 56px; height: 52px; border-radius: 16px; color: #94A6C4; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 11px; font-weight: 500"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Profile</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const stats = [
+      { v: '1,240', l: 'answered', ink: '#FFFFFF', d: 'M9 11l3 3 8-8M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9' },
+      { v: '74%', l: 'accuracy', ink: '#FFFFFF', d: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM12 12h.01' },
+      { v: '12 days', l: 'streak', ink: '#FBBF77', d: 'M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-3 2-4 2-7 2 1 3 3 3 5' }
+    ];
+    const tiles = [
+      { href: 'QuizBuilder.dc.html', label: 'Practice', sub: 'Smart quiz', iconBg: '#E4ECFB', iconInk: '#2550A8', d: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01' },
+      { href: 'PastPapers.dc.html', label: 'Past papers', sub: 'Real exam style', iconBg: '#DDF3F5', iconInk: '#017F8E', d: 'M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5' },
+      { href: 'LiveMock.dc.html', label: 'Grand mock', sub: 'Timed exam', iconBg: '#F0E9FB', iconInk: '#6B3FB8', d: 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM12 9v4l2.5 2M10 2h4' },
+      { href: 'Flashcards.dc.html', label: 'Flashcards', sub: '30 due today', iconBg: '#E6EBF2', iconInk: '#062A5E', d: 'M5 6h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zM7 2h12a2 2 0 0 1 2 2v12' },
+      { href: 'Question.dc.html', label: 'Mistakes', sub: '46 to review', iconBg: '#FFE8D6', iconInk: '#B4441A', d: 'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5' },
+      { href: 'MatchScore.dc.html', label: 'Match', sub: 'Uni predictor', iconBg: '#062A5E', iconInk: accent, d: 'M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z' }
+    ];
+    return { accent, stats, tiles };
+  }
+}
+</script>
+</body>
+</html>

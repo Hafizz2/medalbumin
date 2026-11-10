@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Question bank editor</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&family=Noto+Sans+Ethiopic:wght@400;500&family=Noto+Sans+Arabic:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,input,textarea,select{font:inherit}
+input::placeholder,textarea::placeholder{color:#677489}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', 'Noto Sans Ethiopic', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="AdminDashboard.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>Dashboard</a>
+      <a href="AdminQuestions.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 600; background: #12407F; color: #F3F6FA"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01"></path></svg>Question bank</a>
+      <a href="AdminExams.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="13" r="8"></circle><path d="M12 9v4l2.5 2M10 2h4"></path></svg>Exam builder</a>
+      <a href="AdminVideos.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3"></path></svg>Video library</a>
+      <a href="AdminNotes.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path></svg>Departments &amp; notes</a>
+      <a href="AdminMatch.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Match data</a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="9" cy="8" r="4"></circle><path d="M2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3"></path></svg>Users</a>
+      <a href="AdminPayments.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><span style="display: flex; align-items: center; gap: 12px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20M6 15h4"></path></svg>Payments</span><span style="font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: #FBBF77; color: #062A5E">12</span></a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><span style="display: flex; align-items: center; gap: 12px"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 21v-7M4 14l3-11h13l-3 11z"></path></svg>Reported</span><span style="font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 99px; background: #12407F; color: #F3F6FA">8</span></a>
+      <a href="AdminUsers.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>Push notifications</a>
+      <a href="AdminCommunity.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Community</a>
+      <a href="AdminAnalytics.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>Analytics</a>
+      <a href="AdminSettings.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg>Settings</a>
+      <a href="AdminQuestions.dc.html" style="min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 500; color: #A9BBD8"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 5h8M8 3v2M5 9c1.5 3 4 5 7 6M11 5c-1 4-3.5 7-7 9M13 21l4-10 4 10M14.5 17h5"></path></svg>Languages</a>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">DA</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Dawit A.</span><span style="font-size: 11px; color: #94A6C4">Super admin</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">5,340 questions · 38 past papers</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Question bank</h1>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <button style="height: 44px; padding: 0 16px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"></path></svg>Import Excel / CSV</button>
+        <button style="height: 44px; padding: 0 16px; border-radius: 14px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>New question</button>
+      </div>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 8px">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+        <button style="height: 38px; padding: 0 14px; border-radius: 99px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px">{{f}}<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"></path></svg></button>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <div style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+          <button onClick="{{r.pick}}" style="{{r.style}}">
+            <span style="display: flex; justify-content: space-between; gap: 10px; width: 100%"><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #56657D">{{r.id}}</span><span style="{{r.badge}}">{{r.status}}</span></span>
+            <span style="font-size: 14px; font-weight: 500; line-height: 1.4; text-align: left">{{r.q}}</span>
+            <span style="font-size: 12px; color: #56657D">{{r.meta}}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <section aria-label="Edit question" style="flex: 2 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px">
+          <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.02em">Edit · Q-02418</h2>
+          <div role="tablist" aria-label="Content language" style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{langs}}" as="l" hint-placeholder-count="5">
+              <button role="tab" aria-selected="{{l.on}}" onClick="{{l.pick}}" style="{{l.style}}"><span style="{{l.dot}}"></span>{{l.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <sc-if value="{{hasText}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: 18px">
+            <label style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 600">Question stem</span>
+              <textarea dir="{{dir}}" rows="3" style="border-radius: 14px; border: 1px solid #D8DFEA; padding: 12px 14px; font-size: 15px; line-height: 1.5; resize: vertical; color: #062A5E; background: #F9FBFD">{{stem}}</textarea>
+            </label>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px">
+              <div style="width: 180px; height: 96px; border-radius: 14px; background: #FFF7F5; border: 1px solid #F1DCD6; display: flex; align-items: center; justify-content: center">
+                <svg role="img" aria-label="ECG image attached" width="160" height="60" viewBox="0 0 160 60"><path d="M0 40 L10 40 Q14 35 18 40 L24 40 L26 44 L30 12 L34 48 L36 32 L46 30 Q52 22 58 36 L62 40 L82 40 Q86 35 90 40 L96 40 L98 44 L102 12 L106 48 L108 32 L118 30 Q124 22 130 36 L134 40 L160 40" fill="none" stroke="#1A1A1A" stroke-width="1.4"></path></svg>
+              </div>
+              <button style="width: 180px; height: 96px; border-radius: 14px; border: 1.5px dashed #C3CCDA; background: transparent; color: #475569; font-size: 13px; font-weight: 500; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-5-5L5 21"></path></svg>Add image · X-ray, ECG, slide</button>
+            </div>
+            <fieldset style="border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+              <legend style="font-size: 13px; font-weight: 600; margin-bottom: 8px">Options · select the correct answer</legend>
+              <sc-for list="{{opts}}" as="o" hint-placeholder-count="5">
+                <label style="{{o.style}}">
+                  <input type="radio" name="correct" checked="{{o.on}}" onChange="{{o.pick}}" style="width: 18px; height: 18px; accent-color: #017F8E; margin: 0">
+                  <span style="font-weight: 600; width: 18px">{{o.key}}</span>
+                  <span dir="{{dir}}" style="flex: 1; font-size: 14px">{{o.text}}</span>
+                  <span style="font-size: 12px; font-weight: 600; color: #017F8E">{{o.tag}}</span>
+                </label>
+              </sc-for>
+            </fieldset>
+            <label style="display: flex; flex-direction: column; gap: 8px"><span style="font-size: 13px; font-weight: 600">Explanation</span>
+              <textarea dir="{{dir}}" rows="3" style="border-radius: 14px; border: 1px solid #D8DFEA; padding: 12px 14px; font-size: 14px; line-height: 1.55; resize: vertical; color: #062A5E; background: #F9FBFD">{{exp}}</textarea>
+            </label>
+          </div>
+        </sc-if>
+        <sc-if value="{{noText}}" hint-placeholder-val="{{ false }}">
+          <div style="min-height: 320px; border-radius: 18px; border: 1.5px dashed #C3CCDA; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 24px">
+            <span style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600">No {{langName}} version yet</span>
+            <span style="font-size: 14px; color: #56657D; max-width: 360px">Students using {{langName}} will see the English version until a translation is published.</span>
+            <button style="height: 44px; padding: 0 16px; border-radius: 14px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Add {{langName}} translation</button>
+          </div>
+        </sc-if>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 10px">
+          <sc-for list="{{tags}}" as="t" hint-placeholder-count="5">
+            <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">{{t.k}}</span>
+              <select style="height: 42px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 10px; background: #FFFFFF; font-size: 14px; color: #062A5E"><option>{{t.v}}</option></select>
+            </label>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid #EBEFF5">
+          <span style="font-size: 13px; color: #56657D">Last edited by Selam G. (Content editor) · 2 h ago</span>
+          <div style="display: flex; gap: 10px">
+            <button style="height: 46px; padding: 0 18px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer">Save draft</button>
+            <button style="height: 46px; padding: 0 18px; border-radius: 14px; background: #017F8E; color: #FFFFFF; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Publish</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { sel: 0, lang: 'en', correct: 'C' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const ST = { Published: ['#DDF3F5', '#017F8E'], Draft: ['#E6EBF2', '#475569'], 'In review': ['#FFF3E8', '#8A3412'], Reported: ['#FFE8D6', '#8A3412'] };
+    const R = [
+      ['Q-02418', 'A 58-year-old man has crushing chest pain and a pulse of 48/min. Which artery is most likely occluded?', 'Cardiology · Exit 2024 · Image', 'Published'],
+      ['Q-02417', 'First-line drug for severe pre-eclampsia seizure prophylaxis?', 'OB/GYN · Exit 2024', 'In review'],
+      ['Q-02416', 'Most common cause of community-acquired pneumonia in adults?', 'Respiratory · Exit 2024', 'Published'],
+      ['Q-02415', 'A 4-year-old with bloody diarrhoea and low platelets. Most likely diagnosis?', 'Pediatrics · Qualification 2025', 'Reported'],
+      ['Q-02414', 'Classic triad of renal cell carcinoma?', 'Renal · Block exam', 'Draft'],
+      ['Q-02413', 'Drug of choice for absence seizures in children?', 'Pharmacology · Block exam', 'Published']
+    ];
+    const rows = R.map(([id, q, meta, status], i) => {
+      const on = i === this.state.sel; const b = ST[status];
+      return { id, q, meta, status, pick: () => this.setState({ sel: i }),
+        badge: 'font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; background: ' + b[0] + '; color: ' + b[1],
+        style: 'width: 100%; border: 0; cursor: pointer; padding: 14px 18px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; color: #062A5E; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5; ' : '') + (on ? 'background: #EDF7F9; box-shadow: inset 3px 0 0 #017F8E' : 'background: #FFFFFF') };
+    });
+    const L = [['en', 'English', 'ok'], ['am', 'አማርኛ', 'ok'], ['om', 'Oromoo', 'draft'], ['so', 'Soomaali', 'none'], ['ar', 'العربية', 'none']];
+    const langs = L.map(([id, label, st]) => {
+      const on = id === this.state.lang;
+      return { label, on: on ? 'true' : 'false', pick: () => this.setState({ lang: id }),
+        dot: 'width: 7px; height: 7px; border-radius: 50%; background: ' + (st === 'ok' ? '#017F8E' : st === 'draft' ? '#D9692F' : '#C3CCDA'),
+        style: 'height: 36px; padding: 0 12px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 7px; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') };
+    });
+    const C = {
+      en: { stem: 'A 58-year-old man has had crushing chest pain for 2 hours. His pulse is 48/min. Based on the ECG, which artery is most likely occluded?',
+        o: ['Left anterior descending', 'Left circumflex', 'Right coronary artery', 'Left main coronary', 'Obtuse marginal branch'],
+        exp: 'ST elevation in II, III and aVF means an inferior MI. The inferior wall is supplied by the right coronary artery in most people, and the RCA also feeds the AV node — which explains the bradycardia.' },
+      am: { stem: 'የ58 ዓመት ወንድ ለ2 ሰዓት ከባድ የደረት ሕመም አለበት። የልብ ምቱ 48/ደቂቃ ነው። በECGው መሠረት የትኛው አርተሪ የተዘጋ ሊሆን ይችላል?',
+        o: ['Left anterior descending', 'Left circumflex', 'ቀኝ ኮሮናሪ አርተሪ (RCA)', 'Left main coronary', 'Obtuse marginal branch'],
+        exp: 'በII፣ III እና aVF ላይ ያለው የST ከፍታ የታችኛው ግድግዳ (inferior MI) ጉዳትን ያሳያል። RCA የAV nodeንም ስለሚመግብ bradycardiaን ያስረዳል።' },
+      om: { stem: 'Dhiirri waggaa 58 sa’aatii 2f dhukkubbii qomaa cimaa qaba. Rukuttaan onnee isaa 48/daqiiqaa dha. ECG irratti hundaa’uun, ujummoon dhiigaa kam cufame?',
+        o: ['Left anterior descending', 'Left circumflex', 'Right coronary artery', 'Left main coronary', 'Obtuse marginal branch'],
+        exp: '[Draft — explanation not translated yet]' }
+    };
+    const c = C[this.state.lang];
+    const keys = ['A', 'B', 'C', 'D', 'E'];
+    const opts = c ? c.o.map((text, i) => {
+      const key = keys[i]; const on = key === this.state.correct;
+      return { key, text, on, tag: on ? 'Correct' : '', pick: () => this.setState({ correct: key }),
+        style: 'min-height: 46px; padding: 0 14px; border-radius: 12px; display: flex; align-items: center; gap: 12px; cursor: pointer; border: 1px solid ' + (on ? '#017F8E' : '#D8DFEA') + '; background: ' + (on ? '#EDF7F9' : '#FFFFFF') };
+    }) : [];
+    const names = { en: 'English', am: 'Amharic', om: 'Afaan Oromoo', so: 'Somali', ar: 'Arabic' };
+    const tags = [{ k: 'Department', v: 'Internal Medicine' }, { k: 'Subcategory', v: 'Cardiology' }, { k: 'Exam', v: 'National Exit Exam' }, { k: 'Year', v: '2024' }, { k: 'Difficulty', v: 'Moderate' }];
+    return {
+      accent, rows, langs, opts, tags,
+      filters: ['All subjects', 'All exams', 'Any year', 'Any status', 'Has image'],
+      hasText: !!c, noText: !c, langName: names[this.state.lang],
+      stem: c ? c.stem : '', exp: c ? c.exp : '', dir: 'ltr'
+    };
+  }
+}
+</script>
+</body>
+</html>

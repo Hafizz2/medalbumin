@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Exam builder and grand mocks</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,input,select{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="13">
+        <a href="{{n.href}}" style="{{n.style}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{n.d}}"></path></svg>{{n.label}}</a>
+      </sc-for>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">SG</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Selam G.</span><span style="font-size: 11px; color: #94A6C4">Content editor</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">Grand mocks, department tests, past papers, daily minis</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Exam builder</h1>
+      </div>
+      <button style="height: 44px; padding: 0 16px; border-radius: 14px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">New exam</button>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section aria-label="Exams" style="flex: 1 1 320px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <sc-for list="{{exams}}" as="e" hint-placeholder-count="5">
+          <div style="{{e.row}}">
+            <span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 14px; font-weight: 600">{{e.t}}</span><span style="{{e.badge}}">{{e.st}}</span></span>
+            <span style="font-size: 12px; color: #56657D">{{e.m}}</span>
+          </div>
+        </sc-for>
+      </section>
+
+      <section aria-label="Build exam" style="flex: 2 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 22px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 12px">
+          <label style="display: flex; flex-direction: column; gap: 6px; grid-column: 1 / -1"><span style="font-size: 12px; font-weight: 600; color: #475569">Exam name</span><input value="Grand Mock #12 — Exit Exam" style="height: 46px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 14px; font-size: 16px; font-weight: 600; background: #F9FBFD"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">Date &amp; time</span><input value="Sat 18 Oct 2026 · 9:00 AM" style="height: 42px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 12px; font-size: 14px"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">Duration</span><input value="240 minutes" style="height: 42px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 12px; font-size: 14px"></label>
+          <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">Who can take it</span><select style="height: 42px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 10px; background: #FFFFFF; font-size: 14px"><option>All students (free)</option><option>Premium only</option><option>One university</option></select></label>
+        </div>
+        <div role="radiogroup" aria-label="Exam type" style="display: flex; flex-wrap: wrap; gap: 6px">
+          <sc-for list="{{types}}" as="t" hint-placeholder-count="4">
+            <button role="radio" aria-checked="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Blueprint · questions per department</h2><span style="font-family: 'Geist Mono', monospace; font-size: 14px; color: {{totalInk}}">{{total}} / 200</span></div>
+          <div style="height: 12px; border-radius: 99px; overflow: hidden; display: flex; background: #EBEFF5">
+            <sc-for list="{{blue}}" as="b" hint-placeholder-count="5"><span style="height: 100%; width: {{b.w}}; background: {{b.c}}"></span></sc-for>
+          </div>
+          <div style="border: 1px solid #EBEFF5; border-radius: 16px; overflow: hidden">
+            <sc-for list="{{blue}}" as="b" hint-placeholder-count="5">
+              <div style="{{b.row}}">
+                <span style="width: 10px; height: 10px; border-radius: 3px; background: {{b.c}}"></span>
+                <span style="flex: 1; font-size: 14px; font-weight: 500">{{b.name}}</span>
+                <span style="font-size: 12px; color: #56657D">{{b.avail}} available</span>
+                <button aria-label="Fewer" onClick="{{b.dec}}" style="width: 36px; height: 36px; border-radius: 10px; border: 1px solid #D8DFEA; background: #FFFFFF; cursor: pointer; font-size: 18px">−</button>
+                <span style="font-family: 'Geist Mono', monospace; font-size: 15px; width: 34px; text-align: center">{{b.n}}</span>
+                <button aria-label="More" onClick="{{b.inc}}" style="width: 36px; height: 36px; border-radius: 10px; border: 1px solid #D8DFEA; background: #FFFFFF; cursor: pointer; font-size: 18px">+</button>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 8px">
+          <sc-for list="{{rules}}" as="r" hint-placeholder-count="5">
+            <button role="switch" aria-checked="{{r.on}}" onClick="{{r.pick}}" style="min-height: 48px; padding: 0 12px; border-radius: 12px; border: 1px solid #EBEFF5; background: #F9FBFD; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 10px; color: #062A5E; text-align: left"><span style="font-size: 13px; font-weight: 500">{{r.label}}</span><span style="{{r.track}}"><span style="width: 18px; height: 18px; border-radius: 50%; background: #FFFFFF"></span></span></button>
+          </sc-for>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid #EBEFF5">
+          <span style="font-size: 13px; color: #56657D">2,410 registered · reminder push 1 day and 1 hour before</span>
+          <div style="display: flex; gap: 10px">
+            <button style="height: 46px; padding: 0 18px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer">Save draft</button>
+            <button style="height: 46px; padding: 0 18px; border-radius: 14px; background: #017F8E; color: #FFFFFF; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Schedule &amp; notify students</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { type: 'grand', counts: { im: 70, sur: 45, ped: 40, obg: 30, ph: 15 }, rules: { shuffle: true, opts: true, back: false, answers: true, board: true } }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const NAV = [
+      ['AdminDashboard.dc.html', 'Dashboard', 'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z'],
+      ['AdminQuestions.dc.html', 'Question bank', 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01'],
+      ['AdminExams.dc.html', 'Exam builder', 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM12 9v4l2.5 2M10 2h4'],
+      ['AdminVideos.dc.html', 'Video library', 'M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3'],
+      ['AdminNotes.dc.html', 'Departments & notes', 'M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5'],
+      ['AdminMatch.dc.html', 'Match data', 'M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z'],
+      ['AdminUsers.dc.html', 'Users', 'M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3'],
+      ['AdminPayments.dc.html', 'Payments', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20M6 15h4'],
+      ['AdminCommunity.dc.html', 'Community', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],
+      ['AdminAnalytics.dc.html', 'Analytics', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
+      ['AdminUsers.dc.html', 'Push notifications', 'M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0'],
+      ['AdminSettings.dc.html', 'Settings', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1']
+    ];
+    const active = 'Exam builder';
+    const nav = NAV.map(([href, label, d]) => ({ href, label, d, style: 'min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; ' + (label === active ? 'font-weight: 600; background: #12407F; color: #F3F6FA' : 'font-weight: 500; color: #A9BBD8') }));
+    const ST = { Scheduled: ['#E4ECFB', '#24418A'], 'Results out': ['#DDF3F5', '#017F8E'], Published: ['#DDF3F5', '#017F8E'], Automatic: ['#E6EBF2', '#475569'], Draft: ['#FFF3E8', '#8A3412'] };
+    const E = [['Grand Mock #12 — Exit Exam', 'Sat 18 Oct · 9:00 · 2,410 registered', 'Scheduled'], ['Grand Mock #11 — Exit Exam', '2,190 took it · average 63%', 'Results out'], ['Surgery department test', 'Sun 19 Oct · 60 Q · 75 min', 'Scheduled'], ['Exit Exam 2025 (past paper)', '200 Q · practice + timed', 'Published'], ['Daily mini mock', '20 Q every day at 6 AM, weak-topic mix', 'Automatic'], ['Grand Mock #13 — Exit Exam', 'Blueprint not finished', 'Draft']];
+    const exams = E.map(([t, m, st], i) => ({ t, m, st, badge: 'font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; flex-shrink: 0; background: ' + ST[st][0] + '; color: ' + ST[st][1],
+      row: 'padding: 14px 18px; display: flex; flex-direction: column; gap: 4px; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5; ' : '') + (i === 0 ? 'background: #EDF7F9; box-shadow: inset 3px 0 0 #017F8E' : '') }));
+    const types = [['grand', 'Grand mock (national rank)'], ['past', 'Past paper'], ['dept', 'Department test'], ['daily', 'Daily mini']].map(([id, label]) => {
+      const on = id === this.state.type;
+      return { label, on: on ? 'true' : 'false', pick: () => this.setState({ type: id }),
+        style: 'height: 38px; padding: 0 14px; border-radius: 99px; cursor: pointer; font-size: 13px; font-weight: 600; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') };
+    });
+    const c = this.state.counts;
+    const D = [['im', 'Internal Medicine', '#017F8E', 1820], ['sur', 'Surgery', '#0596A3', 1240], ['ped', 'Pediatrics', '#2550A8', 980], ['obg', 'OB/GYN', '#6B3FB8', 860], ['ph', 'Public Health', '#D4A72C', 540]];
+    const set = (k, v) => this.setState({ counts: { ...c, [k]: Math.max(0, v) } });
+    const blue = D.map(([k, name, col, avail], i) => ({ name, avail: avail.toLocaleString('en-US'), n: c[k], c: col, w: (c[k] / 2) + '%',
+      dec: () => set(k, c[k] - 5), inc: () => set(k, c[k] + 5),
+      row: 'display: flex; align-items: center; gap: 10px; padding: 6px 12px; min-height: 50px; box-sizing: border-box; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : '') }));
+    const total = Object.values(c).reduce((a, b) => a + b, 0);
+    const R = [['shuffle', 'Shuffle question order'], ['opts', 'Shuffle answer options'], ['back', 'Allow going back'], ['answers', 'Show answers after it ends'], ['board', 'National leaderboard']];
+    const rs = this.state.rules;
+    const rules = R.map(([id, label]) => { const on = !!rs[id]; return { label, on: on ? 'true' : 'false', pick: () => this.setState({ rules: { ...rs, [id]: !on } }),
+      track: 'width: 40px; height: 24px; border-radius: 99px; padding: 3px; box-sizing: border-box; display: flex; flex-shrink: 0; justify-content: ' + (on ? 'flex-end; background: #017F8E' : 'flex-start; background: #CFD7E3') }; });
+    return { accent, nav, exams, types, blue, total, totalInk: total === 200 ? '#017F8E' : '#B4441A', rules };
+  }
+}
+</script>
+</body>
+</html>

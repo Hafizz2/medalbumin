@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Video library</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,input,select{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="12">
+        <a href="{{n.href}}" style="{{n.style}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{n.d}}"></path></svg>{{n.label}}</a>
+      </sc-for>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">SG</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Selam G.</span><span style="font-size: 11px; color: #94A6C4">Content editor</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">Lessons linked to departments, subcategories and questions</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Video library</h1>
+      </div>
+      <button style="height: 44px; padding: 0 16px; border-radius: 14px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Upload video</button>
+    </header>
+
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 12px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+        <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; color: #56657D">{{k.l}}</span><span style="font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 700">{{k.v}}</span><span style="font-size: 12px; color: #475569">{{k.s}}</span></div>
+      </sc-for>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section style="flex: 3 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <div style="padding: 14px 16px; border-bottom: 1px solid #EBEFF5; display: flex; flex-wrap: wrap; gap: 6px">
+          <sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+            <button aria-pressed="{{f.on}}" onClick="{{f.pick}}" style="{{f.style}}">{{f.label}}</button>
+          </sc-for>
+        </div>
+        <div style="overflow-x: auto">
+          <div style="min-width: 700px; display: grid; grid-template-columns: 2.6fr 1.6fr 0.8fr 0.9fr 1.3fr 0.9fr; align-items: center; font-size: 14px">
+            <span style="padding: 12px 16px; font-size: 12px; font-weight: 600; color: #56657D">Lesson</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Linked to</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Length</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Views</span><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Watched to end</span><span style="padding: 12px 16px 12px 0; font-size: 12px; font-weight: 600; color: #56657D">Access</span>
+            <sc-for list="{{vids}}" as="v" hint-placeholder-count="6">
+              <span style="padding: 0 16px; min-height: 54px; display: flex; align-items: center; gap: 10px; border-top: 1px solid #EBEFF5"><span style="width: 44px; height: 30px; border-radius: 6px; background: #0D3672; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="#14BCC4"><path d="M8 5v14l11-7z"></path></svg></span><span style="font-weight: 600">{{v.t}}</span></span>
+              <span style="min-height: 54px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-size: 13px; color: #475569">{{v.path}}</span>
+              <span style="min-height: 54px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 13px">{{v.len}}</span>
+              <span style="min-height: 54px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 13px">{{v.views}}</span>
+              <span style="min-height: 54px; display: flex; align-items: center; gap: 8px; border-top: 1px solid #EBEFF5"><span style="width: 70px; height: 6px; border-radius: 99px; background: #EBEFF5; overflow: hidden"><span style="display: block; height: 100%; width: {{v.done}}; background: {{v.c}}"></span></span><span style="font-family: 'Geist Mono', monospace; font-size: 12px">{{v.done}}</span></span>
+              <span style="padding-right: 16px; min-height: 54px; display: flex; align-items: center; border-top: 1px solid #EBEFF5"><span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; background: {{v.aBg}}; color: {{v.aInk}}">{{v.access}}</span></span>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section aria-label="Upload" style="flex: 2 1 360px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; padding: 18px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">New lesson</h2>
+        <div style="border: 1.5px dashed #C3CCDA; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px">
+          <span style="display: flex; justify-content: space-between; font-size: 13px"><span style="font-weight: 600">epilepsy-part-2.mp4</span><span style="font-family: 'Geist Mono', monospace; color: #56657D">64% · 1.1 of 1.7 GB</span></span>
+          <span style="height: 6px; border-radius: 99px; background: #EBEFF5; overflow: hidden"><span style="display: block; width: 64%; height: 100%; background: #017F8E"></span></span>
+          <span style="font-size: 12px; color: #56657D">Compressed to 720p and 360p for slow connections automatically.</span>
+        </div>
+        <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">Title</span><input value="Epilepsy part 2: status epilepticus" style="height: 42px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 12px; font-size: 14px"></label>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">Subcategory</span><select style="height: 42px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 10px; background: #FFFFFF; font-size: 14px"><option>Internal Med › Neurology</option></select></label>
+          <label style="display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; font-weight: 600; color: #475569">Lecturer</span><input value="[Lecturer name]" style="height: 42px; border-radius: 12px; border: 1px solid #D8DFEA; padding: 0 12px; font-size: 14px"></label>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 12px; font-weight: 600; color: #475569">Chapters</span>
+          <span style="display: flex; gap: 8px; font-size: 13px"><span style="font-family: 'Geist Mono', monospace; color: #56657D; width: 48px">00:00</span>Definition and first 5 minutes</span>
+          <span style="display: flex; gap: 8px; font-size: 13px"><span style="font-family: 'Geist Mono', monospace; color: #56657D; width: 48px">03:40</span>Benzodiazepine first line</span>
+          <span style="display: flex; gap: 8px; font-size: 13px"><span style="font-family: 'Geist Mono', monospace; color: #56657D; width: 48px">08:15</span>Refractory status</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <span style="font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 99px; background: #DDF3F5; color: #017F8E">Captions: EN ✓</span>
+          <span style="font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 99px; background: #FFF3E8; color: #8A3412">Captions: አማ missing</span>
+          <span style="font-size: 12px; font-weight: 600; padding: 7px 11px; border-radius: 99px; background: #E6EBF2; color: #475569">12 linked questions</span>
+        </div>
+        <div style="display: flex; gap: 10px">
+          <button style="flex: 1; height: 46px; border-radius: 14px; background: #FFFFFF; border: 1px solid #D8DFEA; font-size: 14px; font-weight: 600; cursor: pointer">Save draft</button>
+          <button style="flex: 1; height: 46px; border-radius: 14px; background: #017F8E; color: #FFFFFF; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Publish</button>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { f: 'all' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const NAV = [
+      ['AdminDashboard.dc.html', 'Dashboard', 'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z'],
+      ['AdminQuestions.dc.html', 'Question bank', 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01'],
+      ['AdminExams.dc.html', 'Exam builder', 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM12 9v4l2.5 2M10 2h4'],
+      ['AdminVideos.dc.html', 'Video library', 'M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3'],
+      ['AdminNotes.dc.html', 'Departments & notes', 'M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5'],
+      ['AdminMatch.dc.html', 'Match data', 'M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z'],
+      ['AdminUsers.dc.html', 'Users', 'M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3'],
+      ['AdminPayments.dc.html', 'Payments', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20M6 15h4'],
+      ['AdminCommunity.dc.html', 'Community', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],
+      ['AdminAnalytics.dc.html', 'Analytics', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
+      ['AdminUsers.dc.html', 'Push notifications', 'M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0'],
+      ['AdminSettings.dc.html', 'Settings', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1']
+    ];
+    const active = 'Video library';
+    const nav = NAV.map(([href, label, d]) => ({ href, label, d, style: 'min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; ' + (label === active ? 'font-weight: 600; background: #12407F; color: #F3F6FA' : 'font-weight: 500; color: #A9BBD8') }));
+    const kpis = [{ l: 'Lessons', v: '312', s: '41 hours of video' }, { l: 'Watch hours this month', v: '18,400', s: '+22% vs last month' }, { l: 'Watched to the end', v: '64%', s: 'Across all lessons' }, { l: 'Storage used', v: '410 GB', s: 'Hosting billed monthly to client' }];
+    const V = [['im', 'Epilepsy: choosing the first drug', 'Internal Med › Neurology', '14:20', '3,104', 71, 'Free'], ['im', 'ECG in 10 minutes', 'Internal Med › Cardiology', '10:05', '5,880', 82, 'Free'], ['obg', 'Hypertensive disorders of pregnancy', 'OB/GYN › Obstetrics', '18:40', '2,210', 58, 'Premium'], ['sur', 'Acute abdomen approach', 'Surgery › General', '22:10', '1,940', 44, 'Premium'], ['ped', 'Neonatal resuscitation', 'Pediatrics › Neonatology', '12:30', '2,760', 76, 'Premium'], ['im', 'Diabetic ketoacidosis', 'Internal Med › Endocrinology', '16:00', '2,030', 39, 'Premium']];
+    const f = this.state.f;
+    const filters = [['all', 'All'], ['im', 'Internal Medicine'], ['sur', 'Surgery'], ['ped', 'Pediatrics'], ['obg', 'OB/GYN']].map(([id, label]) => { const on = id === f; return { label, on: on ? 'true' : 'false', pick: () => this.setState({ f: id }),
+      style: 'height: 34px; padding: 0 12px; border-radius: 99px; cursor: pointer; font-size: 13px; font-weight: 500; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') }; });
+    const vids = V.filter((v) => f === 'all' || v[0] === f).map(([, t, path, len, views, done, access]) => ({ t, path, len, views, done: done + '%', c: done < 50 ? '#D9692F' : '#017F8E', access,
+      aBg: access === 'Free' ? '#DDF3F5' : '#062A5E', aInk: access === 'Free' ? '#017F8E' : '#F3F6FA' }));
+    return { accent, nav, kpis, filters, vids };
+  }
+}
+</script>
+</body>
+</html>

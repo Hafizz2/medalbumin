@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Study plan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 52px 20px 40px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Home.dc.html" aria-label="Back" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; color: #062A5E"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+      <span style="font-size: 13px; font-weight: 600; color: #475569">Exit Exam · Fri 24 Nov</span>
+      <button aria-label="Plan settings" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#062A5E" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h10M4 17h6M18 7h2M14 17h6"></path><circle cx="16" cy="7" r="2"></circle><circle cx="12" cy="17" r="2"></circle></svg></button>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-end">
+      <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -0.03em">AI study plan</h1>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 13px; color: #56657D">Day 18 of 60</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <div style="display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 4px">
+        <span style="height: 8px; border-radius: 99px; background: #017F8E"></span>
+        <span style="height: 8px; border-radius: 99px; background: linear-gradient(90deg, #017F8E 10%, #D8DFEA 10%)"></span>
+        <span style="height: 8px; border-radius: 99px; background: #D8DFEA"></span>
+      </div>
+      <div style="display: grid; grid-template-columns: 2fr 2fr 1fr; gap: 4px; font-size: 11px; color: #56657D"><span>1 · Learn all departments</span><span style="color: #062A5E; font-weight: 600">2 · Revise weak areas</span><span>3 · Mocks</span></div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+      <sc-for list="{{week}}" as="d" hint-placeholder-count="7">
+        <button aria-pressed="{{d.on}}" onClick="{{d.pick}}" style="{{d.style}}"><span style="font-size: 11px; opacity: 0.75">{{d.l}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 15px">{{d.n}}</span><span style="{{d.dot}}"></span></button>
+      </sc-for>
+    </div>
+
+    <div style="padding: 12px 14px; border-radius: 16px; background: #FFF3E8; color: #6A2C0E; display: flex; align-items: center; justify-content: space-between; gap: 10px">
+      <span style="font-size: 13px; line-height: 1.4"><strong>1 day behind.</strong> We can spread the missed work over the next 5 days.</span>
+      <button style="height: 38px; padding: 0 12px; border-radius: 11px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 13px; font-weight: 600; cursor: pointer; flex-shrink: 0">Rebalance</button>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 600">{{dayLabel}}</h2><span style="font-size: 12px; color: #56657D">{{doneCount}} · about 3 h 10 m</span></div>
+    <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 20px; overflow: hidden">
+      <sc-for list="{{tasks}}" as="t" hint-placeholder-count="5">
+        <div style="{{t.row}}">
+          <button role="checkbox" aria-checked="{{t.on}}" aria-label="{{t.title}}" onClick="{{t.toggle}}" style="{{t.box}}"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></button>
+          <a href="{{t.href}}" style="flex: 1; display: flex; flex-direction: column; gap: 2px; text-decoration: none; color: #062A5E; min-width: 0">
+            <span style="font-size: 14px; font-weight: 600; text-decoration: {{t.strike}}">{{t.title}}</span>
+            <span style="font-size: 12px; color: #56657D">{{t.meta}}</span>
+          </a>
+          <span style="font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 8px; border-radius: 99px; background: {{t.tagBg}}; color: {{t.tagInk}}">{{t.kind}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { day: 2, done: { 0: true } }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const L = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const N = [11, 12, 13, 14, 15, 16, 17];
+    const status = ['done', 'missed', 'today', '', '', 'mock', ''];
+    const week = L.map((l, i) => {
+      const on = i === this.state.day;
+      const st = status[i];
+      const dotC = st === 'done' ? '#017F8E' : st === 'missed' ? '#D9692F' : st === 'mock' ? '#6B3FB8' : 'transparent';
+      return { l, n: N[i], on: on ? 'true' : 'false', pick: () => this.setState({ day: i, done: {} }),
+        dot: 'width: 6px; height: 6px; border-radius: 50%; background: ' + (on && st === 'today' ? accent : dotC),
+        style: 'height: 64px; border-radius: 14px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; ' + (on ? 'background: #062A5E; color: #F3F6FA; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #E0E6EE') };
+    });
+    const K = { Questions: ['#DDF3F5', '#017F8E'], Read: ['#FFF3D6', '#7A5A12'], Video: ['#E4ECFB', '#2550A8'], Cards: ['#E6EBF2', '#475569'], Mock: ['#F0E9FB', '#5A3399'] };
+    const T = [
+      ['40 questions · Neurology', 'Internal Medicine · practice mode', 'Questions', 'Department.dc.html'],
+      ['Stroke localisation note', '6 min read · official note', 'Read', 'NoteDetail.dc.html'],
+      ['Epilepsy: choosing the first drug', '14 min video', 'Video', 'VideoLesson.dc.html'],
+      ['30 flashcards due', 'Spaced repetition review', 'Cards', 'Flashcards.dc.html'],
+      ['Mini mock · 20 Q timed', 'Mixed: Neuro + Nephro (your weakest)', 'Mock', 'QuizBuilder.dc.html']
+    ];
+    const done = this.state.done;
+    const tasks = T.map(([title, meta, kind, href], i) => {
+      const on = !!done[i];
+      return { title, meta, kind, href, on: on ? 'true' : 'false', tagBg: K[kind][0], tagInk: K[kind][1], strike: on ? 'line-through' : 'none',
+        toggle: () => this.setState({ done: { ...done, [i]: !on } }),
+        box: 'width: 26px; height: 26px; border-radius: 9px; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: #017F8E; border: 0' : 'background: #FFFFFF; border: 1.5px solid #C3CCDA'),
+        row: 'display: flex; align-items: center; gap: 12px; padding: 10px 14px; min-height: 62px; box-sizing: border-box; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : '') };
+    });
+    const n = Object.values(done).filter(Boolean).length;
+    return { accent, week, tasks, dayLabel: this.state.day === 2 ? 'Today’s plan' : L[this.state.day] + ' ' + N[this.state.day], doneCount: n + ' of 5 done' };
+  }
+}
+</script>
+</body>
+</html>

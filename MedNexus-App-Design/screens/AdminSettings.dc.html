@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin — Roles, promo codes and audit log</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,input{font:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; display: flex; flex-wrap: wrap">
+  <nav aria-label="Admin" style="flex: 1 1 240px; max-width: 100%; background: #062A5E; color: #C5D3EA; padding: 24px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px">
+      <span style="width: 38px; height: 38px; border-radius: 11px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><img src="mednexus-mark.png" alt="MedNexus logo" style="width: 28px; height: 32px; object-fit: contain"></span>
+      <span style="display: flex; flex-direction: column"><span style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; letter-spacing: -0.01em"><span style="color: #FFFFFF">Med</span><span style="color: #14BCC4">Nexus</span></span><span style="font-size: 11px; color: #94A6C4">Admin console</span></span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2px">
+      <sc-for list="{{nav}}" as="n" hint-placeholder-count="12">
+        <a href="{{n.href}}" style="{{n.style}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{n.d}}"></path></svg>{{n.label}}</a>
+      </sc-for>
+    </div>
+    <div style="flex: 1"></div>
+    <div style="display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 14px; background: #0D3672">
+      <span style="width: 34px; height: 34px; border-radius: 50%; background: #24508F; color: #F3F6FA; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">DA</span>
+      <span style="display: flex; flex-direction: column"><span style="font-size: 13px; font-weight: 600; color: #F3F6FA">Dawit A.</span><span style="font-size: 11px; color: #94A6C4">Super admin</span></span>
+    </div>
+  </nav>
+
+  <main style="flex: 999 1 560px; min-width: 0; padding: 28px clamp(16px, 3vw, 40px) 48px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+    <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px">
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <span style="font-size: 13px; color: #56657D">Super admin only · 2-step login required for all admin accounts</span>
+        <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 32px; font-weight: 600; letter-spacing: -0.03em">Settings</h1>
+      </div>
+      <div role="tablist" aria-label="Settings section" style="display: flex; flex-wrap: wrap; gap: 6px; background: #E6EBF2; padding: 4px; border-radius: 14px">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+          <button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+        </sc-for>
+      </div>
+    </header>
+
+    <sc-if value="{{isRoles}}" hint-placeholder-val="{{ true }}">
+      <section style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <div style="padding: 16px 18px; border-bottom: 1px solid #EBEFF5; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Roles &amp; permissions</h2><button style="height: 38px; padding: 0 14px; border-radius: 12px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 13px; font-weight: 600; cursor: pointer">Invite admin</button></div>
+        <div style="overflow-x: auto">
+          <div style="min-width: 760px; display: grid; grid-template-columns: 2.2fr repeat(5, minmax(0, 1fr)); align-items: center">
+            <span style="padding: 12px 18px; font-size: 12px; font-weight: 600; color: #56657D">Permission</span>
+            <sc-for list="{{roles}}" as="r" hint-placeholder-count="5"><span style="padding: 12px 0; font-size: 12px; font-weight: 600; color: #062A5E; text-align: center">{{r.n}}<br><span style="font-weight: 500; color: #56657D">{{r.c}} people</span></span></sc-for>
+            <sc-for list="{{perms}}" as="p" hint-placeholder-count="8">
+              <span style="padding: 0 18px; min-height: 50px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-size: 14px; font-weight: 500">{{p.label}}</span>
+              <sc-for list="{{p.cells}}" as="c" hint-placeholder-count="5">
+                <span style="min-height: 50px; display: flex; align-items: center; justify-content: center; border-top: 1px solid #EBEFF5"><button role="checkbox" aria-checked="{{c.on}}" aria-label="{{c.aria}}" onClick="{{c.pick}}" style="{{c.box}}"><svg aria-hidden="true" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"></path></svg></button></span>
+              </sc-for>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{isPromo}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+        <section style="flex: 3 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+          <div style="padding: 16px 18px; border-bottom: 1px solid #EBEFF5; display: flex; justify-content: space-between; align-items: center"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Promo codes</h2><button style="height: 38px; padding: 0 14px; border-radius: 12px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 13px; font-weight: 600; cursor: pointer">New code</button></div>
+          <div style="overflow-x: auto"><div style="min-width: 600px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; align-items: center; font-size: 14px">
+            <span style="padding: 12px 18px; font-size: 12px; font-weight: 600; color: #56657D">Code</span><span style="font-size: 12px; font-weight: 600; color: #56657D">Discount</span><span style="font-size: 12px; font-weight: 600; color: #56657D">Used</span><span style="font-size: 12px; font-weight: 600; color: #56657D">Ends</span><span style="font-size: 12px; font-weight: 600; color: #56657D">Status</span>
+            <sc-for list="{{codes}}" as="c" hint-placeholder-count="4">
+              <span style="padding: 0 18px; min-height: 50px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-weight: 500">{{c.code}}</span>
+              <span style="min-height: 50px; display: flex; align-items: center; border-top: 1px solid #EBEFF5">{{c.off}}</span>
+              <span style="min-height: 50px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-family: 'Geist Mono', monospace; font-size: 13px">{{c.used}}</span>
+              <span style="min-height: 50px; display: flex; align-items: center; border-top: 1px solid #EBEFF5; font-size: 13px">{{c.ends}}</span>
+              <span style="min-height: 50px; display: flex; align-items: center; border-top: 1px solid #EBEFF5"><span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 99px; background: {{c.bg}}; color: {{c.ink}}">{{c.st}}</span></span>
+            </sc-for>
+          </div></div>
+        </section>
+        <section style="flex: 2 1 320px; min-width: 0; background: #062A5E; color: #F3F6FA; border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+          <h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Invite-a-friend reward</h2>
+          <span style="font-size: 14px; color: #C5D3EA; line-height: 1.5">When an invited friend subscribes, both get <strong style="color: {{accent}}">1 free month</strong>. Up to 6 rewards per student.</span>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <span style="background: #0D3672; border-radius: 14px; padding: 12px; display: flex; flex-direction: column"><span style="font-family: 'Geist Mono', monospace; font-size: 22px">1,184</span><span style="font-size: 11px; color: #94A6C4">invites sent this month</span></span>
+            <span style="background: #0D3672; border-radius: 14px; padding: 12px; display: flex; flex-direction: column"><span style="font-family: 'Geist Mono', monospace; font-size: 22px">212</span><span style="font-size: 11px; color: #94A6C4">became paying students</span></span>
+          </div>
+          <button style="height: 44px; border-radius: 12px; background: {{accent}}; color: #062A5E; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Edit reward</button>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isAudit}}" hint-placeholder-val="{{ false }}">
+      <section style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 22px; overflow: hidden">
+        <div style="padding: 16px 18px; border-bottom: 1px solid #EBEFF5"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Audit log · who changed what</h2></div>
+        <sc-for list="{{log}}" as="l" hint-placeholder-count="6">
+          <div style="{{l.row}}"><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #56657D; width: 120px; flex-shrink: 0">{{l.t}}</span><span style="width: 150px; flex-shrink: 0; font-size: 13px; font-weight: 600">{{l.who}}</span><span style="flex: 1; font-size: 14px">{{l.what}}</span></div>
+        </sc-for>
+      </section>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":1440,"height":1060}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { tab: 'roles', grid: {
+    0: [1, 1, 0, 0, 0], 1: [1, 0, 0, 0, 0], 2: [1, 1, 1, 0, 0], 3: [1, 0, 0, 1, 0], 4: [1, 0, 0, 1, 0], 5: [1, 0, 0, 0, 1], 6: [1, 1, 0, 0, 1], 7: [1, 1, 1, 1, 0] } }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const NAV = [
+      ['AdminDashboard.dc.html', 'Dashboard', 'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z'],
+      ['AdminQuestions.dc.html', 'Question bank', 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5v.01'],
+      ['AdminExams.dc.html', 'Exam builder', 'M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM12 9v4l2.5 2M10 2h4'],
+      ['AdminVideos.dc.html', 'Video library', 'M4 5h11a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM17 10l5-3v10l-5-3'],
+      ['AdminNotes.dc.html', 'Departments & notes', 'M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h5'],
+      ['AdminMatch.dc.html', 'Match data', 'M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z'],
+      ['AdminUsers.dc.html', 'Users', 'M9 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M16 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6.3'],
+      ['AdminPayments.dc.html', 'Payments', 'M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM2 10h20M6 15h4'],
+      ['AdminCommunity.dc.html', 'Community', 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'],
+      ['AdminAnalytics.dc.html', 'Analytics', 'M4 20V10M10 20V4M16 20v-7M22 20H2'],
+      ['AdminUsers.dc.html', 'Push notifications', 'M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0'],
+      ['AdminSettings.dc.html', 'Settings', 'M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1']
+    ];
+    const active = 'Settings';
+    const nav = NAV.map(([href, label, d]) => ({ href, label, d, style: 'min-height: 42px; padding: 0 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; ' + (label === active ? 'font-weight: 600; background: #12407F; color: #F3F6FA' : 'font-weight: 500; color: #A9BBD8') }));
+    const tab = this.state.tab;
+    const tabs = [['roles', 'Roles & permissions'], ['promo', 'Promo codes & referrals'], ['audit', 'Audit log']].map(([id, label]) => { const on = id === tab; return { label, on: on ? 'true' : 'false', pick: () => this.setState({ tab: id }),
+      style: 'height: 40px; padding: 0 14px; border: 0; border-radius: 11px; cursor: pointer; font-size: 14px; font-weight: ' + (on ? '600; background: #FFFFFF; color: #062A5E' : '500; background: transparent; color: #475569') }; });
+    const RN = [['Super admin', 2], ['Content editor', 4], ['Faculty', 6], ['Finance', 2], ['Support', 3]];
+    const roles = RN.map(([n, c]) => ({ n, c }));
+    const P = ['Edit questions & notes', 'Publish without review', 'Answer doubts as faculty', 'Approve payment receipts', 'Change plan prices', 'Suspend or block users', 'Send push notifications', 'View analytics & export'];
+    const g = this.state.grid;
+    const perms = P.map((label, r) => ({ label, cells: RN.map(([rn], c) => { const on = !!g[r][c]; const locked = c === 0;
+      return { on: on ? 'true' : 'false', aria: rn + ': ' + label, pick: () => { if (locked) return; const row = [...g[r]]; row[c] = on ? 0 : 1; this.setState({ grid: { ...g, [r]: row } }); },
+        box: 'width: 26px; height: 26px; border-radius: 8px; cursor: ' + (locked ? 'default' : 'pointer') + '; display: flex; align-items: center; justify-content: center; ' + (on ? 'background: ' + (locked ? '#475569' : '#017F8E') + '; border: 0' : 'background: #FFFFFF; border: 1.5px solid #C3CCDA') }; }) }));
+    const codes = [['EXIT2026', '30% off', '412 / 500', '30 Nov', 'Active'], ['AAU-MED', '20% · AAU students', '188', '31 Dec', 'Active'], ['FRESH50', '50% first month', '1,020 / 1,000', '30 Sep', 'Ended'], ['GRAND12', 'Free 7 days', '96', '18 Oct', 'Active']].map(([code, off, used, ends, st]) => ({ code, off, used, ends, st, bg: st === 'Active' ? '#DDF3F5' : '#E6EBF2', ink: st === 'Active' ? '#017F8E' : '#475569' }));
+    const L = [['Today 14:02', 'Meron K. · Finance', 'Approved receipt FT26286XK31 for Bethlehem Alemu (Semester)'], ['Today 13:40', 'Selam G. · Editor', 'Edited explanation of Q-02418 (English + Amharic)'], ['Today 11:15', 'Dawit A. · Super admin', 'Changed Semester plan price'], ['Today 09:30', 'Dr. faculty account', 'Posted verified answer on Q-01377'], ['Yesterday 18:05', 'Dawit A. · Super admin', 'Scheduled Grand Mock #12 and sent push to 11,204 students'], ['Yesterday 16:44', 'Support · Hiwot', 'Suspended Liya Haile — 3 devices on one account']];
+    const log = L.map(([t, who, what], i) => ({ t, who, what, row: 'display: flex; align-items: center; gap: 12px; padding: 0 18px; min-height: 54px; flex-wrap: wrap; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : '') }));
+    return { accent, nav, tabs, roles, perms, codes, log, isRoles: tab === 'roles', isPromo: tab === 'promo', isAudit: tab === 'audit' };
+  }
+}
+</script>
+</body>
+</html>

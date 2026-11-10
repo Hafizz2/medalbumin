@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Official note with my notes</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button,textarea{font:inherit}
+textarea::placeholder{color:#8A7A55}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 52px 20px 100px; display: flex; flex-direction: column; gap: 14px">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <a href="Notes.dc.html" aria-label="Back to notes" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; color: #062A5E"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+      <div style="display: flex; gap: 8px">
+        <button aria-label="Download for offline" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#062A5E" stroke-width="2" stroke-linecap="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg></button>
+        <button aria-label="Change language" style="height: 44px; padding: 0 12px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; font-size: 13px; font-weight: 600; cursor: pointer">EN · አማ</button>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: #017F8E"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="#017F8E"><path d="M12 2 14.6 4.6 18.3 4.2 18.7 7.9 21.6 10.2 19.8 13.5 20.6 17.1 17 18 15.2 21.3 12 19.6 8.8 21.3 7 18 3.4 17.1 4.2 13.5 2.4 10.2 5.3 7.9 5.7 4.2 9.4 4.6z"></path><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>Official · Internal Med › Neurology</span>
+      <h1 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 600; line-height: 1.12; letter-spacing: -0.025em">Stroke: localising the lesion in 5 minutes</h1>
+    </div>
+
+    <p style="margin: 0; font-size: 15px; line-height: 1.55; color: #2A3A55">Match the deficit to the artery first. <mark style="background: #FDEBB8; color: #062A5E; padding: 0 2px; border-radius: 3px">Face and arm worse than leg points to the MCA</mark>; leg worse than arm points to the ACA.</p>
+
+    <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; overflow: hidden">
+      <sc-for list="{{rows}}" as="r" hint-placeholder-count="4">
+        <div style="{{r.style}}"><span style="font-family: 'Geist Mono', monospace; font-size: 12px; font-weight: 500; color: #017F8E">{{r.a}}</span><span style="font-size: 13px; line-height: 1.4">{{r.f}}</span></div>
+      </sc-for>
+    </div>
+
+    <section aria-label="My notes on this" style="background: #FFFBF2; border: 1px solid #F0E3C4; border-radius: 20px; padding: 14px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: center"><span style="font-size: 13px; font-weight: 700; color: #7A5A12">My notes on this · {{count}}</span><span style="font-size: 11px; color: #7A5A12">Private</span></div>
+      <sc-for list="{{mine}}" as="m" hint-placeholder-count="1">
+        <div style="display: flex; flex-direction: column; gap: 3px; padding-bottom: 8px; border-bottom: 1px dashed #EADBB4"><span style="font-size: 14px; line-height: 1.45">{{m.t}}</span><span style="font-size: 11px; color: #8A7A55">{{m.d}}</span></div>
+      </sc-for>
+      <label style="display: flex; gap: 8px; align-items: flex-end">
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Add a note</span>
+        <textarea rows="2" value="{{draft}}" onChange="{{type}}" placeholder="Add your own note…" style="flex: 1; border-radius: 12px; border: 1px solid #EADBB4; background: #FFFFFF; padding: 10px 12px; font-size: 14px; resize: none; color: #062A5E"></textarea>
+        <button onClick="{{save}}" style="height: 44px; padding: 0 14px; border-radius: 12px; background: #062A5E; color: #F3F6FA; border: 0; font-size: 14px; font-weight: 600; cursor: pointer">Save</button>
+      </label>
+    </section>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 20px 26px; background: #F3F6FA; border-top: 1px solid #E0E6EE">
+    <a href="Question.dc.html" style="height: 54px; border-radius: 16px; background: #062A5E; color: #F3F6FA; text-decoration: none; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; font-weight: 600; font-size: 15px"><span>Practise Neurology questions</span><span style="font-family: 'Geist Mono', monospace; font-size: 13px; color: {{accent}}">214 Q</span></a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { draft: '', mine: [{ t: 'UMN = up (reflexes ↑, tone ↑, Babinski up). LMN = low (wasting, fasciculations).', d: 'Today, 7:42 PM' }] }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const R = [['MCA', 'Contralateral face + arm weakness; aphasia if dominant side'], ['ACA', 'Contralateral leg weakness, urinary incontinence'], ['PCA', 'Contralateral homonymous hemianopia'], ['Brainstem', 'Crossed signs: ipsilateral cranial nerve, contralateral body']];
+    const rows = R.map(([a, f], i) => ({ a, f, style: 'display: grid; grid-template-columns: 76px 1fr; gap: 10px; padding: 10px 14px; align-items: baseline; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5' : '') }));
+    const mine = this.state.mine;
+    return {
+      accent, rows, mine, count: mine.length, draft: this.state.draft,
+      type: (e) => this.setState({ draft: e.target.value }),
+      save: () => { const t = this.state.draft.trim(); if (t) this.setState({ draft: '', mine: [...mine, { t, d: 'Just now' }] }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

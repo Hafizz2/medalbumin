@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Grand mock</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+body{margin:0}
+a{color:#017F8E}a:hover{color:#01606B}
+button{font:inherit}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F3F6FA; font-family: 'Geist', system-ui, sans-serif; color: #062A5E; position: relative; overflow: hidden">
+  <div style="padding: 52px 20px 110px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; align-items: center; gap: 12px">
+      <a href="Home.dc.html" aria-label="Back" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; color: #062A5E; flex-shrink: 0"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg></a>
+      <h1 style="flex: 1; margin: 0; font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -0.02em">Grand mock</h1>
+      <button aria-label="Mock settings" style="width: 44px; height: 44px; border-radius: 14px; background: #FFFFFF; border: 1px solid #E0E6EE; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#062A5E" stroke-width="1.9" stroke-linecap="round"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path></svg></button>
+    </div>
+
+    <div style="background: #062A5E; color: #FFFFFF; border-radius: 18px; padding: 12px 14px; display: flex; align-items: center; gap: 12px">
+      <span style="display: flex; flex-direction: column; gap: 2px; flex: 1"><span style="font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: {{accent}}">Live · national rank</span><span style="font-size: 14px; font-weight: 600">Grand Mock #12 · Sat 18 Oct, 9:00</span><span style="font-size: 12px; color: #A9BBD8">{{joined}} registered · starts in 4 d 14 h</span></span>
+      <button aria-pressed="{{reg}}" onClick="{{toggleReg}}" style="{{regStyle}}">{{regText}}</button>
+    </div>
+
+    <div role="tablist" aria-label="View" style="display: flex; gap: 6px; background: #E6EBF2; padding: 4px; border-radius: 14px">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+        <button role="tab" aria-selected="{{t.on}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{isPractice}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <div style="background: #DDF3F5; border-radius: 18px; padding: 14px; display: flex; align-items: center; gap: 12px">
+          <span style="width: 46px; height: 46px; border-radius: 14px; background: #017F8E; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM12 9v4l2.5 2M10 2h4"></path></svg></span>
+          <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Outfit', sans-serif; font-size: 17px; font-weight: 600">Real exam simulation</span><span style="font-size: 12px; color: #015A66">Timed · mixed questions · full explanations</span></span>
+        </div>
+        <sc-for list="{{modes}}" as="m" hint-placeholder-count="3">
+          <a href="{{m.href}}" style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; padding: 12px 14px; text-decoration: none; color: #062A5E; display: flex; align-items: center; gap: 12px; min-height: 64px; box-sizing: border-box">
+            <span style="width: 40px; height: 40px; border-radius: 12px; background: {{m.bg}}; color: {{m.ink}}; display: flex; align-items: center; justify-content: center; flex-shrink: 0"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="{{m.d}}"></path></svg></span>
+            <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600; font-size: 15px">{{m.t}}</span><span style="font-size: 12px; color: #56657D">{{m.s}}</span></span>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#56657D" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"></path></svg>
+          </a>
+        </sc-for>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 4px"><h2 style="margin: 0; font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600">Previous result</h2><button onClick="{{toResults}}" style="border: 0; background: transparent; color: #017F8E; font-size: 13px; font-weight: 600; cursor: pointer; min-height: 32px">See all</button></div>
+        <a href="MockResult.dc.html" style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; padding: 14px; text-decoration: none; color: #062A5E; display: flex; flex-direction: column; gap: 8px">
+          <span style="display: flex; justify-content: space-between; align-items: baseline"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #56657D">Oct 5, 2026</span><span style="font-size: 15px; font-weight: 600">Full mock exam</span></span><span style="display: flex; flex-direction: column; align-items: flex-end"><span style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 700; color: #017F8E">76%</span><span style="font-family: 'Geist Mono', monospace; font-size: 12px; color: #56657D">152 / 200</span></span></span>
+          <span style="display: flex; gap: 14px; font-size: 12px; color: #56657D; padding-top: 8px; border-top: 1px solid #EBEFF5"><span>4h 00m</span><span>Medium</span><span>Top 21%</span><span style="margin-left: auto; color: #017F8E; font-weight: 600">Detailed report ›</span></span>
+        </a>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isBoard}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <a href="MockResult.dc.html" style="background: #FFFFFF; border: 1.5px solid #062A5E; border-radius: 18px; padding: 12px 14px; text-decoration: none; color: #062A5E; display: flex; align-items: center; gap: 12px">
+          <span style="font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; min-width: 54px">#312</span>
+          <span style="flex: 1; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px; font-weight: 600">You · Grand Mock #11</span><span style="font-size: 12px; color: #56657D">71% · top 15% of 2,190 · up 84 places</span></span>
+        </a>
+        <div style="display: flex; gap: 6px">
+          <sc-for list="{{scopes}}" as="s" hint-placeholder-count="3">
+            <button aria-pressed="{{s.on}}" onClick="{{s.pick}}" style="{{s.style}}">{{s.label}}</button>
+          </sc-for>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 18px; overflow: hidden">
+          <sc-for list="{{board}}" as="b" hint-placeholder-count="5">
+            <div style="{{b.row}}"><span style="font-family: 'Geist Mono', monospace; font-size: 14px; width: 26px; color: {{b.rankInk}}">{{b.rank}}</span><span style="width: 32px; height: 32px; border-radius: 50%; background: #D7E4F2; color: #017F8E; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600">{{b.ini}}</span><span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">{{b.name}}</span><span style="font-size: 11px; color: #56657D">{{b.uni}}</span></span><span style="font-family: 'Geist Mono', monospace; font-size: 14px">{{b.score}}</span></div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{isResults}}" hint-placeholder-val="{{ false }}">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{results}}" as="r" hint-placeholder-count="4">
+          <a href="MockResult.dc.html" style="background: #FFFFFF; border: 1px solid #E0E6EE; border-radius: 16px; padding: 12px 14px; text-decoration: none; color: #062A5E; display: flex; align-items: center; justify-content: space-between; gap: 12px">
+            <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #56657D">{{r.date}} · {{r.time}}</span><span style="font-size: 14px; font-weight: 600">{{r.name}}</span></span>
+            <span style="display: flex; flex-direction: column; align-items: flex-end"><span style="font-family: 'Outfit', sans-serif; font-size: 20px; font-weight: 700; color: #017F8E">{{r.p}}</span><span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #56657D">{{r.s}}</span></span>
+          </a>
+        </sc-for>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#14BCC4","options":["#14BCC4","#7DD3FC","#FBBF77"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { reg: false, tab: 'practice', scope: 'nat' }; }
+  renderVals() {
+    const accent = this.props.accent ?? '#14BCC4';
+    const reg = this.state.reg, tab = this.state.tab;
+    const tabs = [['practice', 'Practice'], ['board', 'Leaderboard'], ['results', 'Results']].map(([id, label]) => {
+      const on = id === tab;
+      return { label, on: on ? 'true' : 'false', pick: () => this.setState({ tab: id }),
+        style: 'flex: 1; height: 40px; border: 0; border-radius: 11px; cursor: pointer; font-size: 14px; font-weight: ' + (on ? '600; background: #FFFFFF; color: #062A5E' : '500; background: transparent; color: #475569') };
+    });
+    const modes = [
+      { t: 'Full mock exam', s: '200 questions · 4 hours · like the real exam', href: 'Question.dc.html', bg: '#062A5E', ink: accent, d: 'M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M9 14l2 2 4-4' },
+      { t: 'By department', s: 'Choose departments and subcategories', href: 'QuizBuilder.dc.html', bg: '#E4ECFB', ink: '#2550A8', d: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5zM4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5' },
+      { t: 'Custom mock', s: 'Set your own size, time and rules', href: 'QuizBuilder.dc.html', bg: '#F0E9FB', ink: '#6B3FB8', d: 'M4 7h10M4 17h6M18 7h2M14 17h6M16 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM12 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4z' }
+    ];
+    const scopes = [['nat', 'National'], ['uni', 'My university'], ['fr', 'Friends']].map(([id, label]) => {
+      const on = id === this.state.scope;
+      return { label, on: on ? 'true' : 'false', pick: () => this.setState({ scope: id }),
+        style: 'height: 36px; padding: 0 12px; border-radius: 99px; cursor: pointer; font-size: 13px; font-weight: 500; ' + (on ? 'background: #062A5E; color: #FFFFFF; border: 1px solid #062A5E' : 'background: #FFFFFF; color: #062A5E; border: 1px solid #D8DFEA') };
+    });
+    const B = {
+      nat: [['Abel M.', 'AM', 'Addis Ababa University', '91%'], ['Sara T.', 'ST', 'University of Gondar', '90%'], ['Yared K.', 'YK', 'Jimma University', '89%'], ['Hiwot B.', 'HB', 'St. Paul’s MMC', '88%'], ['Musa A.', 'MA', 'Haramaya University', '88%']],
+      uni: [['Abel M.', 'AM', 'Addis Ababa University', '91%'], ['Liya H.', 'LH', 'Addis Ababa University', '86%'], ['Hana T. (you)', 'HT', 'Addis Ababa University', '71%', 48]],
+      fr: [['Dawit S.', 'DS', 'Jimma University', '78%'], ['Hana T. (you)', 'HT', 'Addis Ababa University', '71%'], ['Meron A.', 'MA', 'Hawassa University', '66%']]
+    };
+    const board = B[this.state.scope].map(([name, ini, uni, score, r], i) => ({ name, ini, uni, score, rank: r || i + 1,
+      rankInk: i < 3 && this.state.scope === 'nat' ? '#B4441A' : '#56657D',
+      row: 'display: flex; align-items: center; gap: 12px; padding: 8px 14px; min-height: 54px; box-sizing: border-box; ' + (i > 0 ? 'border-top: 1px solid #EBEFF5; ' : '') + (name.includes('you') ? 'background: #EDF7F9' : '') }));
+    const results = [['Oct 5', 'Full mock exam', '76%', '152 / 200', '4h 00m'], ['Sep 27', 'Grand Mock #11 (national)', '71%', '142 / 200', '3h 12m'], ['Sep 20', 'By department · Internal Medicine', '68%', '41 / 60', '1h 10m'], ['Sep 13', 'Grand Mock #10 (national)', '64%', '128 / 200', '3h 40m']].map(([date, name, p, s, time]) => ({ date, name, p, s, time }));
+    return { accent, tabs, modes, scopes, board, results,
+      isPractice: tab === 'practice', isBoard: tab === 'board', isResults: tab === 'results',
+      toResults: () => this.setState({ tab: 'results' }),
+      joined: reg ? '2,411' : '2,410', reg: reg ? 'true' : 'false', toggleReg: () => this.setState({ reg: !reg }),
+      regText: reg ? '✓ Joined' : 'Register',
+      regStyle: 'height: 40px; padding: 0 14px; border-radius: 12px; border: 0; cursor: pointer; font-size: 13px; font-weight: 600; flex-shrink: 0; ' + (reg ? 'background: #12407F; color: ' + accent : 'background: ' + accent + '; color: #062A5E') };
+  }
+}
+</script>
+</body>
+</html>
