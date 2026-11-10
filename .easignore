@@ -1,0 +1,35 @@
+# What EAS Build uploads. When this file exists, EAS ignores .gitignore files,
+# so the mobile app's own ignores are repeated here.
+
+# Not needed for the app build (backend contains a Windows-unfriendly symlink).
+/backend/
+/deploy/
+/MedNexus-App-Design/
+/*.jpg
+
+# Mobile: dependencies and generated folders (EAS reinstalls and prebuilds).
+node_modules/
+/mobile/.expo/
+/mobile/dist/
+/mobile/web-build/
+/mobile/android/
+/mobile/ios/
+/mobile/.kotlin/
+/mobile/.claude/
+/mobile/expo-env.d.ts
+
+# Secrets / signing
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+.env*.local
+
+# Noise
+.DS_Store
+Thumbs.db
+*.log
+*.tsbuildinfo
+.metro-health-check*
